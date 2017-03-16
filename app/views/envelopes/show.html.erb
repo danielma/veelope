@@ -1,0 +1,15 @@
+<h1>
+  <%= @envelope.full_name %>
+  <small>Balance: <%= @envelope.balance.format %></small>
+</h1>
+
+<%= react_component "Components.EnvelopeBalanceHistory", envelope_balance_history_props(@envelope) %>
+
+<%= render(
+  partial: "bank_transactions/bank_transactions",
+  locals: {
+    bank_transactions: @bank_transactions,
+    envelopes: @envelopes,
+    envelope_id: params[:id].presence,
+  }
+) %>

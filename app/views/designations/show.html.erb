@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Account:</strong>
+  <%= @designation.account %>
+</p>
+
+<p>
+  <strong>BankTransaction:</strong>
+  <%= @designation.bank_transaction %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @designation.amount %>
+</p>
+
+<p>
+  <strong>Envelope:</strong>
+  <%= @designation.envelope %>
+</p>
+
+<%= link_to 'Edit', edit_designation_path(@designation) %> |
+<%= link_to 'Back', designations_path %>

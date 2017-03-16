@@ -1,0 +1,21 @@
+<div class="d-f p-1 p-0@sm">
+  <h1 class="f-1 m-0 m-1r@sm">
+    Transactions
+    <% if action_name == "inbox" %>
+      Inbox
+    <% end %>
+    <% if params[:bank_account_id] %>
+      <small><%= link_to "clear filter", bank_transactions_path %></small>
+    <% end %>
+  </h1>
+  <div>
+    <% if action_name == "inbox" %>
+      <%= link_to "All", bank_transactions_path, class: "btn" %>
+    <% else %>
+      <%= link_to "Inbox", inbox_bank_transactions_path, class: "btn" %>
+    <% end %>
+    <%= link_to "+", new_bank_transaction_path, class: "btn" %>
+  </div>
+</div>
+
+<%= render partial: "bank_transactions", locals: { bank_transactions: @bank_transactions, envelopes: @envelopes, envelope_id: params[:envelope_id].presence } %>

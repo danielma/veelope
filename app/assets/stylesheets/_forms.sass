@@ -1,0 +1,65 @@
+.field
+  margin-bottom: 1rem
+
+input,
+textarea
+  font-size: 1rem
+  border: 1px solid $gray
+  border-radius: 2px
+  padding: 3px 5px
+  box-shadow: inset 0 0 2px rgba($black, .2)
+
+  &:focus
+    outline: none
+    border-color: $primary
+    box-shadow: 0 0 3px rgba($primary, .4)
+
+textarea
+  min-width: 300px
+  min-height: 70px
+
+.input-group
+  position: relative
+  display: inline-flex
+
+  @media (max-width: $sm + "px")
+    display: flex
+
+  input
+    flex: 1
+
+  & .input-group-button
+    position: absolute
+    right: 3px
+    top: 3px
+    padding: 1px 5px
+
+  &-badge
+    border: 1px solid $gray
+    border-radius: 2px
+    font-size: 1rem
+    padding: 3px 5px
+    vertical-align: middle
+    background-color: lighten($silver, 10%)
+
+    &--danger
+      background-color: $red
+      border-color: darken($red, 20%)
+      color: $white
+
+    &--success
+      background-color: $green
+      border-color: darken($green, 20%)
+      color: $white
+
+    &--left
+      border-top-right-radius: 0
+      border-bottom-right-radius: 0
+      border-right: none
+
+      +
+        input
+          border-top-left-radius: 0
+          border-bottom-left-radius: 0
+
+

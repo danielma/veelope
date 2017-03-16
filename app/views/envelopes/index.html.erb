@@ -1,0 +1,36 @@
+<div class="d-f">
+  <h1 class="f-1">
+    Envelopes
+  </h1>
+  <div>
+    <%= link_to "Transfer", new_transfer_path, class: "btn" %>
+    <%= link_to "+", new_envelope_path, class: "btn" %>
+  </div>
+</div>
+
+<ul>
+  <% @envelope_groups.each do |group| %>
+    <li>
+      <%= link_to group.name, envelope_group_url(group) %>
+      &mdash;
+      <% if group.balance >= 0 %>
+        <%= group.balance.format %>
+      <% else %>
+        <span class="c-red"><%= group.balance.format %></span>
+      <% end %>
+    </li>
+    <ul>
+      <% group.envelopes.each do |envelope| %>
+        <li>
+          <%= link_to envelope.name, envelope_url(envelope) %>
+          &mdash;
+          <% if envelope.balance >= 0 %>
+            <%= envelope.balance.format %>
+          <% else %>
+            <span class="c-red"><%= envelope.balance.format %></span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</ul>

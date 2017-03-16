@@ -1,0 +1,27 @@
+<%= form_for(envelope) do |f| %>
+  <% if envelope.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(envelope.errors.count, "error") %> prohibited this envelope from being saved:</h2>
+
+      <ul>
+      <% envelope.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :envelope_group_id %>
+    <%= f.collection_select :envelope_group_id, EnvelopeGroup.all, :id, :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit class: "btn btn--primary" %>
+  </div>
+<% end %>

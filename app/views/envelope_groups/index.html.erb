@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Envelope Groups</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Account</th>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @envelope_groups.each do |envelope_group| %>
+      <tr>
+        <td><%= envelope_group.account %></td>
+        <td><%= envelope_group.name %></td>
+        <td><%= link_to 'Show', envelope_group %></td>
+        <td><%= link_to 'Edit', edit_envelope_group_path(envelope_group) %></td>
+        <td><%= link_to 'Destroy', envelope_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Envelope Group', new_envelope_group_path %>

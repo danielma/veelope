@@ -1,0 +1,10 @@
+<h1>New Transaction</h1>
+
+<%= form_for(@bank_transaction, url: bank_transactions_path) do |f| %>
+  <%= render partial: "form", locals: { bank_transaction: @bank_transaction, f: f } %>
+
+  <div class="actions">
+    <%= link_to "Back", bank_transactions_path, class: "btn" %>
+    <%= f.submit "Create", class: "btn btn--primary" %>
+  </div>
+<% end %>

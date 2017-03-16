@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+west_savings:
+  account: west_family
+  name: Savings Account
+  remote_identifier: ws_12345
+  type: <%= BankAccount.types[:depository] %>
+  bank_connection: wescom_credit_union
+
+west_checking:
+  account: west_family
+  name: Checking Account
+  remote_identifier: checking_12345
+  type: <%= BankAccount.types[:credit] %>
+  bank_connection: wescom_credit_union
+
+west_transfers:
+  account: west_family
+  name: <%= BankAccount::TRANSFERS_NAME %>
+  type: <%= BankAccount.types[:utility] %>
+
+bluth_savings:
+  account: bluth_family
+  name: Wells Fargo Savings
+  remote_identifier: wf_12345
+  type: <%= BankAccount.types[:depository] %>
+  bank_connection: bluth_wells_fargo

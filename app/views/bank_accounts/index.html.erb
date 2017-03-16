@@ -1,0 +1,18 @@
+<h1>Bank Accounts</h1>
+
+<% if @bank_accounts.present? %>
+  <table>
+    <tbody>
+      <% @bank_accounts.each do |bank_account| %>
+        <tr>
+          <td><%= bank_account.name %></td>
+          <td><%= link_to 'Edit', edit_bank_account_path(bank_account), class: "btn" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>
+    You don't have any accounts set up. Seems like it's a good time to <%= link_to "connect to your bank", new_bank_connection_path %>.
+  </p>
+<% end %>

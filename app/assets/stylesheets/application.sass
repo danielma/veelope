@@ -1,0 +1,143 @@
+$font-family: "Asap", monospace
+
+// minions variables
+$xl: 1200
+$lg:  960
+$md:  720
+$sm:  600
+$xs:  480
+
+$white:   #FEFEFE
+$navy:    #001f3f
+$blue:    #247BA0
+$aqua:    #7fdbff
+$teal:    #39cccc
+$olive:   #3d9970
+$green:   #70C1B3
+$lime:    #01ff70
+$yellow:  #FFE066
+$orange:  #ff851b
+$red:     #F25F5C
+$maroon:  #85144b
+$fuchsia: #f012be
+$purple:  #b10dc9
+$gray:    #aaaaaa
+$silver:  #D4D2D5
+$black:   #111111
+
+$primary: $blue
+  
+@import "minions_rails/scss/color"
+@import "minions_rails/scss/display"
+@import "minions_rails/scss/display-sm"
+@import "minions_rails/scss/display-md"
+@import "minions_rails/scss/flex"
+@import "minions_rails/scss/flex-sm"
+@import "minions_rails/scss/flex-!sm"
+@import "minions_rails/scss/float"
+@import "minions_rails/scss/margin"
+@import "minions_rails/scss/margin-sm"
+@import "minions_rails/scss/margin-!sm"
+@import "minions_rails/scss/opacity"
+@import "minions_rails/scss/padding"
+@import "minions_rails/scss/padding-sm"
+@import "minions_rails/scss/width"
+@import "minions_rails/scss/width-sm"
+@import "**/*"
+
+html
+  box-sizing: border-box
+
+*, *:before, *:after
+  box-sizing: inherit
+
+html, body, select, input, textarea
+  color: $black
+
+html, body, select, input, textarea, button
+  font-family: $font-family
+  font-weight: 100
+  text-rendering: optimizeLegibility
+  font-size: 16px
+  -webkit-text-size-adjust: 100%
+
+  @media (max-width: $sm + "px")
+    font-size: 18px
+
+h1
+  @media (max-width: $sm + "px")
+    font-size: 1.4em
+    margin-left: .5rem
+
+ul
+  margin: 0
+
+a
+  color: $primary
+
+[data-toggle-siblings]
+  cursor: pointer
+
+small
+  font-size: 60%
+
+.main-content
+  @media (min-width: $sm + 1 + "px")
+    > :first-child
+      margin-top: 0
+
+header
+  width: 100%
+  padding: 0
+  background-color: $navy
+  border-bottom: 1px solid rgba($black, .5)
+
+  a
+    display: block
+    padding: 1rem
+    color: $white
+    text-decoration: none
+
+    @media (max-width: $sm + "px")
+      padding: .75rem
+
+  ul
+    list-style-type: none
+    padding: 0
+    margin: 0
+
+    a.active
+      background-color: rgba($white, 0.15)
+
+    li
+      float: left
+      display: inline-block
+      transition: background-color .1s
+
+      &:hover
+        background-color: rgba($white, 0.1)
+
+        ul
+          display: block
+
+      ul
+        display: none
+        position: absolute
+        z-index: 1
+        right: 0
+        background-color: $navy
+
+        li
+          display: block
+          float: none
+
+#notifications-container
+  position: fixed
+  bottom: 0
+  left: 0
+  right: 0
+
+  > :first-child
+    padding: 1rem
+    background-color: $black
+    transition: opacity .4s

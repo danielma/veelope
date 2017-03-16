@@ -1,0 +1,15 @@
+<h1>Editing Bank Account: <%= @bank_account.name %></h1>
+
+<%= form_for(@bank_account) do |f| %>
+  <%= render_errors @bank_account %>
+
+  <div class="field">
+    <%= f.label :initial_balance_cents, "Initial Balance" %>
+    <%= react_component "Components.MoneyInput", name: "bank_account[initial_balance_cents]", id: "bank_account_initial_balance_cents", default_value: @bank_account.initial_balance_cents %>
+  </div>
+  
+  <div class="actions mt-1r">
+    <%= link_to "Back", bank_accounts_path, class: "btn" %>
+    <%= f.submit class: "btn btn--primary" %>
+  </div>
+<% end %>

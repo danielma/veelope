@@ -1,0 +1,9 @@
+wescom_credit_union:
+  plaid_access_token: ws_12345
+  account: west_family
+  refreshed_at: 3005-01-01
+
+bluth_wells_fargo:
+  plaid_access_token: wf_12345
+  account: bluth_family
+  refreshed_at: 3005-01-01

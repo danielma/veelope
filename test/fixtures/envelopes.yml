@@ -1,0 +1,19 @@
+income_cash_pool:
+  account: west_family
+  envelope_group: utility
+  name: <%= Envelope::INCOME_CASH_POOL_NAME %>
+
+groceries:
+  account: west_family
+  envelope_group: food
+  name: Groceries
+
+blessing:
+  account: west_family
+  envelope_group: giving
+  name: Blessing
+
+bluth_blessing:
+  account: bluth_family
+  envelope_group: bluth_giving
+  name: Bluth Blessing

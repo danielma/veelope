@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+kanye:
+  account: west_family
+  username: kanye
+  password_digest: <%= BCrypt::Password.create("kanye", cost: BCrypt::Engine::MIN_COST) %>
+  auth_token: auth_token
+
+michael_bluth:
+  account: bluth_family
+  username: michael
+  password_digest: <%= BCrypt::Password.create("michael", cost: BCrypt::Engine::MIN_COST) %>
+  auth_token: auth_toke

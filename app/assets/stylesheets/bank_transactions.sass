@@ -1,0 +1,56 @@
+.bank-transactions-table
+  border-collapse: collapse
+  width: 100%
+  table-layout: fixed
+
+  tr:nth-child(even)
+    background-color: lighten($silver, 13%)
+
+  th, td
+    text-align: left
+    padding: .3rem .5rem
+
+  &-account
+    white-space: nowrap
+
+  &-payee
+    overflow: hidden
+
+  
+.bank-transaction
+  padding: .5rem
+  
+  &:nth-child(even)
+    background-color: lighten($silver, 13%)
+
+  a.d-f
+    text-decoration: none
+    font-weight: bold
+
+    *
+      text-decoration: underline
+
+  &-payee
+    overflow: scroll
+    white-space: nowrap
+    margin-right: 1rem
+
+  &-amount
+    font-weight: bold
+    text-decoration: none !important
+    color: $black
+
+  &-edits
+    font-size: .7em
+    margin-top: .5rem
+
+  &-controls
+    font-size: .7em
+    margin-top: .5rem
+
+    > div
+      flex: 1
+      text-align: center
+
+  select
+    width: 100%

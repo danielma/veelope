@@ -1,0 +1,13 @@
+<h1>Connection: <%= @bank_connection.institution_name %></h1>
+
+<h2>Accounts</h2>
+<% @bank_connection.bank_accounts.each do |bank_account| %>
+  <div id="<%= dom_id bank_account %>">
+    <%= bank_account.name %>
+  </div>
+<% end %>
+
+<div class="mt-1r">
+  <%= link_to "Force Refresh", refresh_bank_connection_path(@bank_connection), method: :post, class: "btn" %>
+  <%= link_to "Delete", bank_connection_path(@bank_connection), method: :delete, class: "btn btn--danger", data: { confirm: "Are you sure?" } %>
+</div>

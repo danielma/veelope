@@ -1,0 +1,16 @@
+<h1>Connections</h1>
+
+<% @bank_connections.each do |connection| %>
+  <div id="<%= dom_id(connection) %>">
+    <%= link_to(connection.institution_name || "(Unknown)", connection) %>
+    &mdash;
+    Last refreshed:
+    <% if connection.refreshed_at %>
+      <%= connection.refreshed_at.to_s(:datetime) %>
+    <% else %>
+      Never
+    <% end %>
+  </div>
+<% end %>
+    
+<%= link_to "New Connection", new_bank_connection_path, class: "btn" %>

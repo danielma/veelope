@@ -1,0 +1,20 @@
+<h1>New Connection</h1>
+
+<%= link_to "Cancel", bank_connections_path, class: "btn" %>
+<!-- A hidden input named public_token will be appended to this form
+     once the user has completed the Link flow. Link will then submit the
+     form, sending the public_token to your server. -->
+<%= form_tag bank_connections_url, method: "post", id: "plaid-link-form" %>
+
+<!-- To use Link with longtail institutions on Connect, set the
+     data-longtail attribute to 'true'. See the Parameter Reference for
+     additional documentation. -->
+<script
+  src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"
+  data-client-name="Envelope"
+  data-form-id="plaid-link-form"
+  data-key="<%= AppConfig.plaid.public_key %>"
+  data-product="connect"
+  data-longtail="true" 
+  data-env="tartan">
+</script>

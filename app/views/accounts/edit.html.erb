@@ -1,0 +1,10 @@
+<h1>Settings</h1>
+
+<%= form_for @account do |f| %>
+  <%= f.label :time_zone %>
+  <%= f.time_zone_select :time_zone %>
+
+  <p>
+    <%= f.submit "Update", class: "btn" %>
+  </p>
+<% end %>

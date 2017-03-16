@@ -1,0 +1,45 @@
+Auto:
+  - General
+  - Insurance
+  - Maintenance
+
+Government:
+  - Taxes
+
+Home:
+  - Mortgage
+  - Water
+  - Electric
+  - Maintenance
+  - Phone
+  - Internet
+  - Household Products
+  - Gardener
+
+Health:
+  - Life Insurance
+  - Medical Expense
+  - Fitness
+
+Food:
+  - Groceries
+  - Dining Out
+
+Savings:
+  - General
+  - Vacation
+  - Investments
+
+Personal:
+  - Fun
+  - Clothing, Accessories, etc
+  - Kids
+  - Software 
+  - Misc
+
+Misc:
+  - Misc
+
+Utility:
+  - Income Cash Pool
+  - Transfers

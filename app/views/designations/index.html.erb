@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Designations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Account</th>
+      <th>BankTransaction</th>
+      <th>Amount</th>
+      <th>Envelope</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @designations.each do |designation| %>
+      <tr>
+        <td><%= designation.account %></td>
+        <td><%= designation.bank_transaction %></td>
+        <td><%= designation.amount %></td>
+        <td><%= designation.envelope %></td>
+        <td><%= link_to 'Show', designation %></td>
+        <td><%= link_to 'Edit', edit_designation_path(designation) %></td>
+        <td><%= link_to 'Destroy', designation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Designation', new_designation_path %>

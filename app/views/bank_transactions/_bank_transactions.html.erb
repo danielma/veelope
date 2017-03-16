@@ -1,0 +1,63 @@
+<% envelope_id = local_assigns[:envelope_id] || nil %>
+
+<table class="d-n d-b@md bank-transactions-table">
+  <thead>
+    <tr>
+      <th>Bank account</th>
+      <th>Payee</th>
+      <th>Amount</th>
+      <th>Envelope</th>
+      <th>Posted</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% bank_transactions.each do |bank_transaction| %>
+      <tr>
+        <td class="bank-transactions-table-account"><%= link_to bank_transaction.bank_account.name, bank_account_bank_transactions_path(bank_transaction.bank_account) %></td>
+        <td class="bank-transactions-table-payee">
+          <%= link_to edit_bank_transaction_path(bank_transaction, return_to: request.fullpath) do %>
+            <%= bank_transaction.payee %>
+            <% if bank_transaction.memo.present? %>
+              (<%= bank_transaction.memo %>)
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= bank_transaction.amount_for_envelope(envelope_id).format %></td>
+        <td>
+          <%= react_component "Components.DesignationSelector", designation_selector_props(bank_transaction, envelopes: envelopes) %>
+        </td>
+        <td><%= bank_transaction.posted_at.to_s(:date) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="d-b d-n@md">
+  <% bank_transactions.each do |bank_transaction| %>
+    <div class="bank-transaction">
+      <%= link_to edit_bank_transaction_path(bank_transaction, return_to: request.fullpath), class: "d-f" do %>
+        <div class="bank-transaction-payee f-1">
+          <%= bank_transaction.payee %>
+          <% if bank_transaction.memo.present? %>
+            (<%= bank_transaction.memo %>)
+          <% end %>
+        </div>
+        <div class="bank-transaction-amount"><%= bank_transaction.amount_for_envelope(envelope_id).format %></div>
+      <% end %>
+
+      <div class="bank-transaction-edits">
+        <div class="bank-transaction-envelope">
+          <%= react_component "Components.DesignationSelector", designation_selector_props(bank_transaction, envelopes: envelopes) %>
+        </div>
+      </div>
+
+      <div class="d-f bank-transaction-controls">
+        <div class="bank-transaction-bank-account"><%= link_to bank_transaction.bank_account.name, bank_account_bank_transactions_path(bank_transaction.bank_account) %></div>
+        <div class="bank-transaction-posted-at"><%= bank_transaction.posted_at.to_s(:date) %></div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= paginate bank_transactions %>

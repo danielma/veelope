@@ -1,0 +1,5 @@
+console:
+  auto_set_current_account: false
+
+sidekiq:
+  allow_all: true

@@ -1,0 +1,2 @@
+module BankConnectionsHelper
+end

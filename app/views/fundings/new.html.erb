@@ -1,0 +1,17 @@
+<h1>New Funding</h1>
+
+<%= form_for(@funding, url: fundings_path, html: { class: "m-05r@!sm" }) do |f| %>
+  <%= render_errors(@funding) %>
+
+  <div class="field mb-1r">
+    <%= react_component(
+      "Components.FundingEditor",
+      funding_editor_props(@funding, envelopes: @envelopes)
+    ) %>
+  </div>
+
+  <div class="actions">
+    <%= link_to "Back", root_path, class: "btn" %>
+    <%= f.submit "Create", class: "btn btn--primary" %>
+  </div>
+<% end %>

@@ -1,0 +1,27 @@
+west_vons:
+  bank_account: west_checking
+  account: west_family
+  payee: Vons
+  posted_at: 2016-12-23
+  amount_cents: -5000
+
+west_undesignated:
+  account: west_family
+  bank_account: west_checking
+  payee: Target
+  posted_at: 2016-11-23
+  amount_cents: -4000
+
+west_checking_initial_balance:
+  account: west_family
+  bank_account: west_checking
+  payee: Initial Balance
+  posted_at: 1885-01-01
+  amount_cents: 10000
+
+bluth_walmart:
+  bank_account: bluth_savings
+  account: bluth_family
+  payee: WAL-MART
+  posted_at: 2016-12-30
+  amount_cents: -20000

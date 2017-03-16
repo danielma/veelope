@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Envelope</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= webpack_include_tag "main", "data-turbolinks-track": "reload" %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Asap:400,700" rel="stylesheet">
+    <script src="https://use.fontawesome.com/e40178f153.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">  
+    <meta name="turbolinks-cache-control" content="no-cache">
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        Veelope.run(<%= js_config.to_json.html_safe %>)
+      })
+    </script>
+  </head>
+
+  <body>
+    <% if current_user %>
+      <header>
+        <div class="d-f">
+          <ul class="f-1">
+            <li>
+              <%= navigation_link_to "Dashboard", root_url %>
+            </li>
+            <li>
+              <%= navigation_link_to "Transactions", bank_transactions_url %>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <%= link_to edit_account_path do %>
+                <i class="fa fa-cog"></i>
+              <% end %>
+              <ul>
+                <li>
+                  <%= navigation_link_to "New Funding", new_funding_url %>
+                </li>
+                <li>
+                  <%= navigation_link_to "Envelopes", envelopes_url %>
+                </li>
+                <li>
+                  <%= navigation_link_to "Bank Accounts", bank_accounts_url %>
+                </li>
+                <li>
+                  <%= navigation_link_to "Connections", bank_connections_url %>
+                </li>
+                <li>
+                  <%= navigation_link_to "Logout", session_url, method: :delete %>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </header>
+    <% end %>
+    <div class="main-content p-1r@sm">
+      <% if flash.present? %>
+        <div class="alert-container">
+          <% flash.to_hash.each do |name, msg| -%>
+            <%= content_tag :div, msg.html_safe, class: "alert alert--#{name}" if msg.present? %>
+          <% end -%>
+        </div>
+      <% end %>
+
+      <%= yield %>
+
+    </div>
+
+    <div id="notifications-container"></div>
+  </body>
+</html>

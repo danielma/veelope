@@ -1,0 +1,11 @@
+<div class="alert-container">
+  <div class="alert alert--info">
+    <h2><%= pluralize(errors.count, "error") %> prohibited this from being saved:</h2>
+
+    <ul>
+      <% errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

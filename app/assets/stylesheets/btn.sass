@@ -1,0 +1,73 @@
+button,
+[type="submit"]
+  background-color: inherit
+  color: $primary
+  border-color: inherit
+  font-family: $font-family
+  font-weight: 100
+
+/* https://github.com/chantastic/btn.css/blob/5cff7af52b15afe37c4374c3951e5f703d7312d9/btn.css */
+
+.btn
+  font-size: 1em
+  line-height: 2
+  display: inline-block
+  padding: 0 1em
+  cursor: pointer
+  white-space: nowrap
+  text-decoration: none
+  border-width: 1px
+  border-style: solid
+  border-radius: 2px
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+  &--sm
+    line-height: 1.4
+    padding: 0 .65em
+
+  &--in-input
+    line-height: 1
+
+  &--primary
+    background-color: $primary
+    border-color: darken($primary, 10%)
+    color: $white
+
+  &--secondary
+    color: darken($gray, 30%)
+
+  &--success
+    background-color: $green
+    border-color: darken($green, 10%)
+    color: $white
+
+    &.btn--outline
+      color: $green
+
+  &--danger
+    background-color: $red
+    border-color: darken($red, 20%)
+    color: $white
+
+    &.btn--outline
+      color: $red
+
+  &--info
+    background-color: $yellow
+    border-color: darken($yellow, 20%)
+    color: $white
+
+    &.btn--outline
+      color: $yellow
+
+  &--symbol
+    font-family: sans-serif
+    font-weight: bold
+
+  &--outline
+    background: transparent
+
+

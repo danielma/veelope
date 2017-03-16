@@ -1,0 +1,23 @@
+west_vons_groceries:
+  account: west_family
+  bank_transaction: west_vons
+  amount_cents: -2000
+  envelope: groceries
+
+west_vons_blessing:
+  account: west_family
+  bank_transaction: west_vons
+  amount_cents: -3000
+  envelope: blessing
+
+west_checking_initial_balance:
+  account: west_family
+  bank_transaction: west_checking_initial_balance
+  amount_cents: 10000
+  envelope: income_cash_pool
+
+bluth_walmart:
+  account: bluth_family
+  bank_transaction: bluth_walmart
+  amount_cents: -20000
+  envelope: bluth_blessing

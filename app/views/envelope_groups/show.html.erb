@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Account:</strong>
+  <%= @envelope_group.account %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @envelope_group.name %>
+</p>
+
+<%= link_to 'Edit', edit_envelope_group_path(@envelope_group) %> |
+<%= link_to 'Back', envelope_groups_path %>

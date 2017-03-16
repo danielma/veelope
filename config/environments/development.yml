@@ -1,0 +1,7 @@
+console:
+  auto_set_current_account: true
+
+account_creation_secret: <%= ENV["ACCOUNT_CREATION_SECRET"] %>
+
+sidekiq:
+  allow_all: true

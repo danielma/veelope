@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+food:
+  account: west_family
+  name: Food
+
+giving:
+  account: west_family
+  name: Giving
+
+utility:
+  account: west_family
+  name: Utility
+
+bluth_giving:
+  account: bluth_family
+  name: Giving

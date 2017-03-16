@@ -1,0 +1,10 @@
+<h1>Editing Transaction</h1>
+
+<%= form_for(@bank_transaction, url: bank_transaction_path(@bank_transaction), html: { class: "m-0@sm m-05r" }) do |f| %>
+  <%= render partial: "form", locals: { bank_transaction: @bank_transaction, f: f } %>
+
+  <div class="actions">
+    <%= link_to "Back", return_to_path || bank_transactions_path, class: "btn" %>
+    <%= f.submit "Update", class: "btn btn--primary" %>
+  </div>
+<% end %>

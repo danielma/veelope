@@ -1,0 +1,57 @@
+{
+  "name": "envelope",
+  "version": "1.0.0",
+  "description": "envelopes",
+  "main": "index.js",
+  "private": true,
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "NODE_PATH='app/assets/javascripts' ./node_modules/.bin/mocha --compilers js:babel-core/register --recursive --require test/test_helper.js test/assets/javascripts/",
+    "heroku-postbuild": "NODE_ENV=production webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/danielma/envelope-rails.git"
+  },
+  "author": "Daniel Ma",
+  "license": "",
+  "homepage": "https://bitbucket.org/danielma/envelope-rails#readme",
+  "dependencies": {
+    "assets-webpack-plugin": "~3",
+    "axios": "^0.15.3",
+    "babel": "~6",
+    "babel-core": "^6.7.7",
+    "babel-loader": "~6",
+    "babel-plugin-import-glob": "^1.0.1",
+    "babel-plugin-transform-es2015-modules-amd": "^6.6.5",
+    "babel-plugin-transform-export-extensions": "^6.5.0",
+    "babel-polyfill": "~6",
+    "babel-preset-es2015": "~6",
+    "babel-preset-react": "~6",
+    "babel-preset-stage-2": "~6",
+    "classnames": "^2.2.3",
+    "immutable": "^3.7.6",
+    "moment": "^2.17.1",
+    "ramda": "^0.23.0",
+    "react": "~15",
+    "react-dom": "~15",
+    "react-redux": "~5",
+    "recharts": "^0.20.1",
+    "redux": "~3",
+    "webpack": "^1.12.9"
+  },
+  "devDependencies": {
+    "babel-eslint": "^6.0.4",
+    "chai": "^3.5.0",
+    "chai-immutable": "^1.5.3",
+    "eslint": "^1.6.0",
+    "eslint-plugin-react": "^3.14.0",
+    "jsdom": "^8.0.4",
+    "mocha": "^2.4.5",
+    "react-addons-test-utils": "~15",
+    "redux-logger": "^2.6.0",
+    "sinon": "^1.17.3"
+  }
+}

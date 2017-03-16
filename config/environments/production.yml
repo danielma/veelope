@@ -1,0 +1,6 @@
+console:
+  auto_set_current_account: true
+
+sidekiq:
+  allow_all: false
+  super_username: <%= ENV["SIDEKIQ_SUPER_USERNAME"] %>

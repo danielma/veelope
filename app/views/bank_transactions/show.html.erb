@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Bank account:</strong>
+  <%= @bank_transaction.bank_account %>
+</p>
+
+<p>
+  <strong>Account:</strong>
+  <%= @bank_transaction.account %>
+</p>
+
+<p>
+  <strong>Payee:</strong>
+  <%= @bank_transaction.payee %>
+</p>
+
+<p>
+  <strong>Posted at:</strong>
+  <%= @bank_transaction.posted_at %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @bank_transaction.amount %>
+</p>
+
+<p>
+  <strong>Memo:</strong>
+  <%= @bank_transaction.memo %>
+</p>
+
+<%= link_to 'Edit', edit_bank_transaction_path(@bank_transaction) %> |
+<%= link_to 'Back', bank_transactions_path %>

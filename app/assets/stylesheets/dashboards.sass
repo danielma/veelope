@@ -1,0 +1,30 @@
+.dashboard-envelopes
+  &-group-name
+    font-weight: bold
+    padding: .5rem
+    background-color: $blue
+    color: white
+    border-bottom: 1px solid rgba($black, 0.2)
+
+  &-envelope
+    display: block
+    text-decoration: none
+    padding: .5rem
+
+    &:nth-child(even)
+      background-color: lighten($silver, 12%)
+
+    &-name
+      color: $black
+      float: left
+
+    &-amount
+      text-align: right
+      color: $black
+
+      .amount-positive
+        color: darken($green, 20%)
+
+      .amount-negative
+        color: darken($red, 20%)
+         
