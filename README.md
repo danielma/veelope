@@ -4,9 +4,24 @@ A super simple envelope budgeting tool built using Ruby on Rails + the Plaid API
 
 It's designed to be self-hosted, and stay out of your way. It uses [Plaid's transactions product](https://plaid.com/products/transactions/) to synchronize with your bank for maximum convenience.
 
+## Setup
+
+Get a [Plaid](https://plaid.com/) account, because you'll need those values to run the application. Then deploy to heroku!
+
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-Hit me up on Twitter [@personunsure](https://twitter.com/personunsure) or in the issues if you need any help.
+### Non-Heroku
+
+- Clone the repo
+- Ensure all ENV variables in `.env.example` are set. `dotenv` is included, so you can copy that to `.env` and fill in the values to make it work
+- `$ bundle`
+- `$ bin/rake db:create && bin/rake db:migrate`
+- `$ yarn` (or `npm install`)
+- `$ foreman start`
+
+## Help
+
+Hit me up on Twitter [@personunsure](https://twitter.com/personunsure) or in the github issues if you need any help.
 
 ## Screenshots
 
