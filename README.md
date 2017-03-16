@@ -1,24 +1,27 @@
-# README
+# Veelope
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A super simple envelope budgeting tool built using Ruby on Rails + the Plaid API.
 
-Things you may want to cover:
+It's designed to be self-hosted, and stay out of your way. It uses [Plaid's transactions product](https://plaid.com/products/transactions/) to synchronize with your bank for maximum convenience.
 
-* Ruby version
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-* System dependencies
+Hit me up on Twitter [@personunsure](https://twitter.com/personunsure) or in the issues if you need any help.
 
-* Configuration
+## Screenshots
 
-* Database creation
+Main screen
 
-* Database initialization
+<img src="screenshots/home.png" alt="Home page" width="400" height="473" />
 
-* How to run the test suite
+Transaction list
 
-* Services (job queues, cache servers, search engines, etc.)
+<img src="screenshots/transactions.png" alt="Home page" width="400" height="511" />
 
-* Deployment instructions
+Transaction editor
 
-* ...
+<img src="screenshots/transaction-editor.png" alt="Home page" width="400" height="534" />
+
+## Contributing
+
+Pull requests and issues welcome!

@@ -1,0 +1,34 @@
+{
+  "name": "Veelope",
+  "description": "A super simple envelope budgeting tool",
+  "keywords": [
+    "budget",
+    "rails",
+    "react"
+  ],
+  "website": "https://github.com/danielma/veelope",
+  "repository": "https://github.com/danielma/veelope",
+  "env": {
+    "PLAID_CLIENT_ID": {
+      "description": "Your Plaid client ID"
+    },
+    "PLAID_PUBLIC_KEY": {
+      "description": "Your Plaid public key"
+    },
+    "PLAID_SECRET": {
+      "description": "Your Plaid secret"
+    },
+    "SIDEKIQ_SUPER_USERNAME": {
+      "description": "A special username that has access to the /sidekiq endpoint",
+      "required": false
+    }
+  },
+  "addons": [
+    "heroku-postgresql",
+    "heroku-redis"
+  ],
+  "buildpacks": [
+    { "url": "heroku/nodejs" },
+    { "url": "heroku/ruby" }
+  ]
+}
