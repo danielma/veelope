@@ -19,10 +19,10 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate
-    if cookies.signed[:user_id]
-      authenticate_with_cookie
-    elsif session[:user_id]
+    if session[:user_id]
       authenticate_with_session
+    elsif cookies.signed[:user_id]
+      authenticate_with_cookie
     else
       flash[:info] = "Please login"
       redirect_to new_session_url
@@ -42,6 +42,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_with_cookie
     @current_user = User.unscoped.find(cookies.signed[:user_id])
+    session[:user_id] = cookies.signed[:user_id]
     set_current_tenant(current_user.account)
   rescue
     @current_user = nil
