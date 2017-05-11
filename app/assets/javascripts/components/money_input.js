@@ -34,6 +34,10 @@ export default React.createClass({
     }
   },
 
+  componentDidMount() {
+    this.input.focus()
+  },
+
   componentDidUpdate(_, prevState) {
     let needsNewVisibleValue = false
     let { value } = this.state
