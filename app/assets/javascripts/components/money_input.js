@@ -117,7 +117,7 @@ export default React.createClass({
         </label>
         <input
           type="tel"
-          pattern="[0-9\.\-]*"
+          pattern="[0-9\.\-,]*"
           id={id || this.state.id}
           {...rest}
           value={this.state.visibleValue}
