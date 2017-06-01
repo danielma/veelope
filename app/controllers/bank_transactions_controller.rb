@@ -84,6 +84,14 @@ class BankTransactionsController < ApplicationController
     end
   end
 
+  def destroy
+    @bank_transaction = BankTransaction.find(params[:id])
+
+    @bank_transaction.destroy!
+
+    redirect_to return_to_path || bank_transactions_url
+  end
+
   private
 
   def load_envelopes
