@@ -1,6 +1,6 @@
 import React from "react"
 import { prop, sum } from "ramda"
-import { formatMoney, displayMoney } from "utils/text"
+import { displayMoney } from "utils/text"
 const { arrayOf, shape, string, number, bool } = React.PropTypes
 import MoneyInput from "components/money_input"
 
@@ -81,6 +81,7 @@ export default React.createClass({
     const { envelopes, totalAmountCents, isNewRecord, limitCents } = this.props
     const { designations } = this.state
     const totalCents = sum(designations.map(prop("amountCents")))
+    const isPositive = totalAmountCents > 0
 
     return (
       <div>
@@ -93,6 +94,7 @@ export default React.createClass({
             availableEnvelopeIds={this.getAvailableEnvelopeIds()}
             onUpdate={(d) => this.handleUpdateDesignation(index, d)}
             onRemove={designations.length > 1 ? () => this.handleRemoveDesignation(index) : null}
+            isPositive={isPositive}
             index={index} />
         ))}
 
@@ -127,6 +129,7 @@ function Designation({
   onUpdate,
   onRemove,
   context,
+  isPositive,
 }) {
   function name(inputName) {
     return `${context}[designations_attributes][${index}][${inputName}]`
@@ -151,6 +154,7 @@ function Designation({
           className="mr-05r@sm"
           name={name("amount_cents")}
           value={designation.amountCents}
+          isPositive={isPositive}
           onChange={handleChangeAmount} />
         <select
           name={name("envelope_id")}

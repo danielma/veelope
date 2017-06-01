@@ -3,7 +3,7 @@ import { formatMoney, displayMoney } from "utils/text"
 import { isIOS } from "utils/browser"
 import { uniqueId } from "utils/id"
 import classNames from "classnames"
-const { func, string, number } = React.PropTypes
+const { func, string, number, bool } = React.PropTypes
 
 export default React.createClass({
   propTypes: {
@@ -13,6 +13,7 @@ export default React.createClass({
     value: number,
     defaultValue: number,
     id: string,
+    isPositive: bool,
   },
 
   getDefaultProps() {
@@ -47,7 +48,7 @@ export default React.createClass({
       this.input.focus()
     }
 
-    if (prevState.isPositive !== this.state.isPositive &&
+    if (this.getIsPositive(prevState) !== this.getIsPositive() &&
         prevState.value === value &&
         prevState.visibleValue === this.state.visibleValue) {
       value = value * -1
@@ -68,13 +69,13 @@ export default React.createClass({
 
   handleChange({ target }) {
     if (isIOS) {
-      const isPositive = this.state.isPositive
+      const isPositive = this.getIsPositive()
       const rawCents = parseInt(target.value.replace(/\D/g, ""), 10) || 0
       const cents = rawCents * (isPositive ? 1 : -1)
 
       this.setState({ value: cents, visibleValue: displayMoney(cents, false) })
     } else {
-      const newValue = Math.round(parseFloat(target.value.replace(/[^0-9\.]/g, "")) * 100) || 0
+      const newValue = Math.round(parseFloat(target.value.replace(/[^0-9\-\.]/g, "")) * 100) || 0
 
       this.setState({ value: newValue, visibleValue: target.value, isPositive: newValue >= 0 })
     }
@@ -88,10 +89,6 @@ export default React.createClass({
     this.setState({ isFocused: false })
   },
 
-  handleTogglePositiveClick() {
-    this.setState({ isPositive: !this.state.isPositive })
-  },
-
   getValue() {
     if (this.props.value) {
       return this.props.value
@@ -100,9 +97,17 @@ export default React.createClass({
     }
   },
 
+  getIsPositive(state = this.state) {
+    if (!isIOS || typeof this.props.isPositive === "undefined") {
+      return state.isPositive
+    } else {
+      return this.props.isPositive
+    }
+  },
+
   render() {
-    const { className, name, id, value, defaultValue, ...rest } = this.props
-    const { isPositive } = this.state
+    let { className, name, id, value, defaultValue, isPositive, ...rest } = this.props
+    isPositive = this.getIsPositive()
 
     return (
       <div className={`${className} input-group money-input`}>
@@ -126,12 +131,6 @@ export default React.createClass({
           onFocus={this.handleFocus}
           ref={(e) => this.input = e}
           />
-        <a
-          className="input-group-button btn btn--in-input btn--symbol btn--outline"
-          onClick={this.handleTogglePositiveClick}
-          >
-          {isPositive ? "+" : "−"}
-        </a>
         <input type="hidden" name={name} value={this.getValue()} />
       </div>
     )
