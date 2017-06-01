@@ -97,4 +97,12 @@ class BankTransactionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
   end
+
+  test "#destroy destroys a transaction" do
+    assert_difference "BankTransaction.count", -1 do
+      delete bank_transaction_url(bank_transaction)
+    end
+
+    assert_redirected_to bank_transactions_url
+  end
 end

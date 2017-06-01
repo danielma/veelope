@@ -5,6 +5,9 @@
 
   <div class="actions">
     <%= link_to "Back", return_to_path || bank_transactions_path, class: "btn" %>
+    <%= link_to bank_transaction_path(@bank_transaction), remote: true, method: :delete, class: "btn btn--danger", data: { confirm: "Are you sure?" } do %>
+      <i class="fa fa-trash"></i>
+    <% end %>
     <%= f.submit "Update", class: "btn btn--primary" %>
   </div>
 <% end %>

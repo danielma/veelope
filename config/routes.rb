@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   end
   resources :envelope_groups
   resources :bank_accounts, only: %i(index edit update) do
-    resources :bank_transactions, path: "transactions", shallow: true, only: %i(index new create edit update)
+    resources :bank_transactions, path: "transactions", shallow: true, only: %i(index new create edit update destroy)
   end
   resources :bank_connections, only: %i(index show new create destroy) do
     post :refresh, on: :member
