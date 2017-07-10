@@ -50,6 +50,12 @@ export default React.createClass({
     })
   },
 
+  handleKeyDown(e) {
+    if (e.ctrlKey && e.key === "s") {
+      this.handleAddClick()
+    }
+  },
+
   handleUpdateDesignation(index, designation) {
     const newDesignations = [...this.state.designations]
     newDesignations.splice(index, 1, designation)
@@ -84,7 +90,7 @@ export default React.createClass({
     const isPositive = totalAmountCents > 0
 
     return (
-      <div>
+      <div onKeyDown={this.handleKeyDown}>
         {designations.map((designation, index) => (
           <Designation
             key={designation.id ? `d${designation.id}` : `e${designation.envelopeId}${index}`}
