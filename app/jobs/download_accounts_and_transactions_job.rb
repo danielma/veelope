@@ -1,5 +1,6 @@
 class DownloadAccountsAndTransactionsJob < ApplicationJob
-  rescue_from(Plaid::ServerError) do
+  rescue_from(Plaid::ServerError) do |error|
+    Bugsnag.notify(error)
     retry_job wait: 5.minutes
   end
 
