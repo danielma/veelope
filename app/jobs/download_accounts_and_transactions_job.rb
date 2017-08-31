@@ -21,9 +21,9 @@ class DownloadAccountsAndTransactionsJob < ApplicationJob
     set_connection_institution
     create_transactions
     set_initial_balances
-    bank_connection.update!(refreshed_at: Time.current)
+    bank_connection.update!(successfully_refreshed_at: Time.current)
   ensure
-    bank_connection.update!(refreshing: false)
+    bank_connection.update!(refreshing: false, refreshed_at: Time.current)
   end
 
   private

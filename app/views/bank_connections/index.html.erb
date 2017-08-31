@@ -10,6 +10,15 @@
     <% else %>
       Never
     <% end %>
+
+    <br/>
+
+    Last successful refresh:
+    <% if connection.successfully_refreshed_at %>
+      <%= connection.successfully_refreshed_at.to_s(:datetime) %>
+    <% else %>
+      Never
+    <% end %>
   </div>
 <% end %>
     
