@@ -4,6 +4,12 @@ class DownloadAccountsAndTransactionsJob < ApplicationJob
     retry_job wait: 5.minutes
   end
 
+  rescue_from(Plaid::RequestFailedError) do |error|
+    Bugsnag.notify(error) do |notification|
+      notification.severity = "error"
+    end
+  end
+
   def perform(bank_connection_id)
     job_scope(BankConnection, bank_connection_id) do |bank_connection|
       @bank_connection = bank_connection
