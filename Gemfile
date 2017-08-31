@@ -36,6 +36,7 @@ gem "kaminari"
 gem "pg"
 gem "awesome_print"
 gem "acts_as_tenant"
+gem "bugsnag"
 
 # Use Capistrano for deployment
 # gem "capistrano-rails", group: :development

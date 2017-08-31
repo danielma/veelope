@@ -4,3 +4,6 @@ console:
 sidekiq:
   allow_all: false
   super_username: <%= ENV["SIDEKIQ_SUPER_USERNAME"] %>
+
+bugsnag:
+  api_key: <%= ENV["BUGSNAG_API_KEY"] %>
