@@ -1,4 +1,8 @@
 class DownloadAccountsAndTransactionsJob < ApplicationJob
+  rescue_from(Plaid::ServerError) do
+    retry_job wait: 5.minutes
+  end
+
   def perform(bank_connection_id)
     job_scope(BankConnection, bank_connection_id) do |bank_connection|
       @bank_connection = bank_connection

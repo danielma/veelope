@@ -5,7 +5,7 @@ class BankConnection < ApplicationRecord
     :candidate_for_refresh,
     lambda do
       where(refreshing: false).
-      where("refreshed_at IS NULL OR refreshed_at < ?", 1.hour.ago)
+      where("refreshed_at IS NULL OR refreshed_at < ?", 3.hours.ago)
     end,
   )
 
