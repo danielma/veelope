@@ -1,5 +1,12 @@
-Plaid.config do |p|
-  p.client_id = AppConfig.plaid.client_id
-  p.secret = AppConfig.plaid.secret
-  p.env = :tartan
+module Plaid
+  class << self
+    attr_accessor :client
+  end
+
+  self.client = Client.new(
+    env: AppConfig.plaid.env.to_sym,
+    client_id: AppConfig.plaid.client_id,
+    secret: AppConfig.plaid.secret,
+    public_key: AppConfig.plaid.public_key,
+  )
 end
