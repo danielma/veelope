@@ -1,10 +1,10 @@
 class DownloadAccountsAndTransactionsJob < ApplicationJob
-  rescue_from(Plaid::ServerError) do |error|
+  rescue_from(Plaid::RateLimitExceededError) do |error|
     Bugsnag.notify(error)
-    retry_job wait: 5.minutes
+    retry_job wait: 20.minutes
   end
 
-  rescue_from(Plaid::RequestFailedError) do |error|
+  rescue_from(Plaid::ItemError, Plaid::InvalidRequestError) do |error|
     Bugsnag.notify(error) do |notification|
       notification.severity = "error"
     end
@@ -39,22 +39,22 @@ class DownloadAccountsAndTransactionsJob < ApplicationJob
   def create_accounts
     @bank_accounts = bank_connection.remote_accounts.map do |account|
       BankAccount.find_or_create_by!(
-        remote_identifier: account.id,
-        type: account.type,
+        remote_identifier: account["account_id"],
+        type: account["type"],
         bank_connection: bank_connection,
       ) do |a|
-        a.name = account.name
+        a.name = account["name"]
       end
     end
   end
 
   def set_connection_institution
-    bank_connection.update!(institution_name: bank_connection.remote_institution.name)
+    bank_connection.update!(institution_name: bank_connection.remote_institution["name"])
   end
 
   def set_initial_balances
     bank_connection.remote_accounts.each do |remote_account|
-      bank_account = @bank_accounts.find { |ba| ba.remote_identifier == remote_account.id }
+      bank_account = @bank_accounts.find { |ba| ba.remote_identifier == remote_account["account_id"] }
 
       next if bank_account.initial_balance_persisted?
 
@@ -66,9 +66,9 @@ class DownloadAccountsAndTransactionsJob < ApplicationJob
 
   def remote_balance_cents(bank_account, remote_account)
     if bank_account.credit?
-      remote_account.current_balance * -100
+      remote_account["balances"]["current"] * -100
     else
-      remote_account.current_balance * 100
+      remote_account["balances"]["current"] * 100
     end
   end
 
@@ -79,15 +79,15 @@ class DownloadAccountsAndTransactionsJob < ApplicationJob
   end
 
   def create_transaction(transaction)
-    bank_account = BankAccount.find_by!(remote_identifier: transaction.account_id)
+    bank_account = BankAccount.find_by!(remote_identifier: transaction["account_id"])
     BankTransaction.find_or_create_by!(
-      remote_identifier: transaction.id,
+      remote_identifier: transaction["transaction_id"],
       source: "remote",
       bank_account: bank_account,
     ) do |t|
-      t.posted_at = transaction.date
-      t.amount = transaction.amount * -1
-      t.payee = transaction.name
+      t.posted_at = Date.parse(transaction["date"])
+      t.amount = transaction["amount"] * -1
+      t.payee = transaction["name"]
     end
   end
 end

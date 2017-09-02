@@ -2,6 +2,7 @@ ENV["RAILS_ENV"] ||= "test"
 require File.expand_path("../../config/environment", __FILE__)
 require "rails/test_help"
 require "minitest/mock"
+require "webmock/minitest"
 require_relative "support/custom_assertions"
 
 Dir.glob(Rails.root.join("test/models/concerns/*.rb")).each { |file| require file }

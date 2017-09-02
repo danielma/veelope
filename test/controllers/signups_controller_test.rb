@@ -43,10 +43,15 @@ class SignupsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "#create can work without secret if it's disabled" do
-    AppConfig.account_creation_secret = nil
+    begin
+      old_secret = AppConfig.account_creation_secret
+      AppConfig.account_creation_secret = nil
 
-    assert_difference "User.unscoped.count" do
-      post(signups_url, params: signup_params)
+      assert_difference "User.unscoped.count" do
+        post(signups_url, params: signup_params)
+      end
+    ensure
+      AppConfig.account_creation_secret = old_secret
     end
   end
 

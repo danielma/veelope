@@ -3,3 +3,5 @@ console:
 
 sidekiq:
   allow_all: true
+
+account_creation_secret: bojack
