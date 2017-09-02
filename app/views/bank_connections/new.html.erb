@@ -1,20 +1,49 @@
 <h1>New Connection</h1>
 
-<%= link_to "Cancel", bank_connections_path, class: "btn" %>
 <!-- A hidden input named public_token will be appended to this form
      once the user has completed the Link flow. Link will then submit the
      form, sending the public_token to your server. -->
-<%= form_tag bank_connections_url, method: "post", id: "plaid-link-form" %>
+<%= form_tag bank_connections_url, method: "post", id: "plaid-link-form" do %>
+  <input type="hidden" name="public_token" id="plaid-public-token" />
+<% end %>
+
+<button id="linkButton" class="btn btn--primary">Link to Plaid</button>
+
+<%= link_to "Cancel", bank_connections_path, class: "btn" %>
 
 <!-- To use Link with longtail institutions on Connect, set the
      data-longtail attribute to 'true'. See the Parameter Reference for
      additional documentation. -->
-<script
-  src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"
-  data-client-name="Envelope"
-  data-form-id="plaid-link-form"
-  data-key="<%= AppConfig.plaid.public_key %>"
-  data-product="connect"
-  data-longtail="true" 
-  data-env="tartan">
+<script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
+<script>
+ var linkHandler = Plaid.create({
+   env: '<%= AppConfig.plaid.env %>',
+   apiVersion: 'v2',
+   clientName: 'Envelope',
+   key: '<%= AppConfig.plaid.public_key %>',
+   product: ['accounts', 'transactions'],
+   onLoad: function() {
+     // The Link module finished loading.
+   },
+   onSuccess: function(public_token, metadata) {
+     // The onSuccess callback has not changed!
+     // Send the public_token to your app server here.
+     var form = document.getElementById("plaid-link-form")
+     document.getElementById("plaid-public-token").value = public_token
+     form.submit()
+   },
+   onExit: function(err, metadata) {
+     // The user exited the Link flow.
+     if (err != null) {
+       // The user encountered a Plaid API error prior to exiting.
+     }
+     // metadata contains information about the institution
+     // that the user selected and the most recent API request IDs.
+     // Storing this information can be helpful for support.
+   }
+ });
+ // Trigger the standard institution select view
+ document.getElementById('linkButton').onclick = function() {
+   linkHandler.open();
+ };
 </script>

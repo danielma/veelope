@@ -29,7 +29,7 @@ class BankAccount < ApplicationRecord
   def remote_bank_account
     return unless bank_connection
 
-    bank_connection.remote_accounts.find { |a| a.id == remote_identifier }
+    bank_connection.remote_accounts.find { |a| a["account_id"] == remote_identifier }
   end
 
   def initial_balance_persisted?

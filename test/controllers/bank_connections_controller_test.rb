@@ -15,9 +15,9 @@ class BankConnectionsControllerTest < ActionDispatch::IntegrationTest
 
   test "#create should add a BankConnection" do
     assert_difference "BankConnection.unscoped.where(plaid_access_token: '123').count" do
-      struct = Struct.new(:access_token)
+      response = { "access_token" => "123" }
 
-      Plaid::User.expect(:exchange_token, struct.new("123"), ["tok_123"]) do
+      Plaid.client.item.public_token.expect(:exchange, response, ["tok_123"]) do
         assert_enqueued_with(job: DownloadAccountsAndTransactionsJob) do
           post(bank_connections_url, params: { public_token: "tok_123" })
         end
