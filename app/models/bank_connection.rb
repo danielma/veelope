@@ -55,6 +55,6 @@ class BankConnection < ApplicationRecord
   private
 
   def plaid_item
-    @plaid_item ||= Plaid.client.item.get(plaid_access_token)
+    @plaid_item ||= Plaid.client.item.get(plaid_access_token)["item"]
   end
 end

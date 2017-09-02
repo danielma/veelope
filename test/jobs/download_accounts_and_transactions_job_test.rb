@@ -187,7 +187,7 @@ class DownloadAccountsAndTransactionsJobTest < ActiveJob::TestCase
         "available_products" => %w(auth balance credit_details identity income),
         "billed_products" => ["transactions"],
         "error" => nil,
-        "institution_id" => fake_plaid_institution["institution_id"],
+        "institution_id" => fake_plaid_institution["institution"]["institution_id"],
         "item_id" => "item_id",
         "webhook" => "",
       },
@@ -382,7 +382,7 @@ class DownloadAccountsAndTransactionsJobTest < ActiveJob::TestCase
 
   def stub_plaid_methods
     Plaid.client.item.expect(:get, fake_plaid_item, [bank_connection.plaid_access_token]) do
-      Plaid.client.institutions.expect(:get_by_id, fake_plaid_institution, [fake_plaid_institution["institution_id"]]) do
+      Plaid.client.institutions.expect(:get_by_id, fake_plaid_institution, [fake_plaid_institution["institution"]["institution_id"]]) do
         stub_plaid_accounts do
           transactions_mock = MiniTest::Mock.new
           transactions_mock.expect(:call, fake_plaid_transactions, [bank_connection.plaid_access_token, Date, Date, offset: 0])

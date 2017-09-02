@@ -4,7 +4,7 @@ class DownloadAccountsAndTransactionsJob < ApplicationJob
     retry_job wait: 20.minutes
   end
 
-  rescue_from(Plaid::ItemError) do |error|
+  rescue_from(Plaid::ItemError, Plaid::InvalidRequestError) do |error|
     Bugsnag.notify(error) do |notification|
       notification.severity = "error"
     end
