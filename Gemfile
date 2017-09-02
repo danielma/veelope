@@ -29,7 +29,7 @@ gem "config_spartan"
 gem "money-rails"
 gem "react-rails", "~> 1"
 gem "request_store", "1.3.1"
-gem "plaid", "~> 2"
+gem "plaid"
 gem "sidekiq", "~> 4"
 gem "minions_rails"
 gem "kaminari"
@@ -66,6 +66,10 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
+end
+
+group :test do
+  gem "webmock"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
