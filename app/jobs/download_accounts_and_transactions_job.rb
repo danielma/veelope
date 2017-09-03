@@ -4,7 +4,7 @@ class DownloadAccountsAndTransactionsJob < ApplicationJob
     retry_job wait: 20.minutes
   end
 
-  rescue_from(Plaid::ItemError, Plaid::InvalidRequestError) do |error|
+  rescue_from(Plaid::InvalidRequestError) do |error|
     Bugsnag.notify(error) do |notification|
       notification.severity = "error"
     end
@@ -14,12 +14,14 @@ class DownloadAccountsAndTransactionsJob < ApplicationJob
     job_scope(BankConnection, bank_connection_id) do |bank_connection|
       @bank_connection = bank_connection
 
+      return if bank_connection.refreshing
+
       perform_in_scope
     end
   end
 
   def perform_in_scope
-    return if bank_connection.refreshing
+    job_finished_updates = {}
 
     bank_connection.update!(refreshing: true)
 
@@ -27,9 +29,18 @@ class DownloadAccountsAndTransactionsJob < ApplicationJob
     set_connection_institution
     create_transactions
     set_initial_balances
-    bank_connection.update!(successfully_refreshed_at: Time.current)
+    job_finished_updates[:successfully_refreshed_at] = Time.current
+  rescue Plaid::ItemError => e
+    Bugsnag.notify(e) { |n| n.severity = "error" }
+    job_finished_updates[:user_action_required_message] = e.error_message
   ensure
-    bank_connection.update!(refreshing: false, refreshed_at: Time.current)
+    bank_connection.update!(
+      job_finished_updates.reverse_merge(
+        user_action_required_message: nil,
+        refreshing: false,
+        refreshed_at: Time.current,
+      ),
+    )
   end
 
   private

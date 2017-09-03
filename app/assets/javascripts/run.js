@@ -2,6 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import NotificationsContainer from "components/notifications_container"
 import dataToggleSiblings from "data_actions/toggle_siblings"
+import { configure as configurePlaid } from "plaid"
 
 export default function(config) {
   if (config.refreshing_connections) {
@@ -11,6 +12,7 @@ export default function(config) {
   }
 
   dataToggleSiblings.attach()
+  configurePlaid(config.plaid)
 }
 
 function notifyRefreshingConnections(notifications = []) {

@@ -12,9 +12,27 @@ class BankConnection < ApplicationRecord
   has_many :bank_accounts, dependent: :destroy
 
   def self.from_plaid_public_token(public_token)
+    new.tap do |instance|
+      instance.exchange_public_token(public_token)
+    end
+  end
+
+  def exchange_public_token(public_token)
     response = Plaid.client.item.public_token.exchange(public_token)
 
-    new(plaid_access_token: response["access_token"])
+    self.plaid_access_token = response["access_token"]
+  end
+
+  def user_action_required?
+    user_action_required_message.present?
+  end
+
+  def last_refresh_successful?
+    (successfully_refreshed_at - refreshed_at).abs < 1
+  end
+
+  def public_token
+    @public_token ||= Plaid.client.item.public_token.create(plaid_access_token)["public_token"]
   end
 
   def remote_accounts

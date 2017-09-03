@@ -15,6 +15,13 @@ module ApplicationHelper
     {
       refreshing_connections: @refreshing_connections && @refreshing_connections.
         pluck(:institution_name),
+      plaid: {
+        env: AppConfig.plaid.env,
+        api_version: "v2",
+        client_name: "Envelope",
+        key: AppConfig.plaid.public_key,
+        product: ["transactions"],
+      },
     }
   end
 
