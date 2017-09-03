@@ -164,6 +164,27 @@ class DownloadAccountsAndTransactionsJobTest < ActiveJob::TestCase
     end
   end
 
+  test "sets user_action_required_message" do
+    Plaid.client.accounts.stub(
+      :get,
+      ->(_) { fail Plaid::ItemError.new("TYPE", "CODE", "message", "", "") },
+    ) do
+      assert_change -> { bank_connection.reload.user_action_required_message }, "message" do
+        described_class.perform_now(bank_connection.id)
+      end
+    end
+  end
+
+  test "clears user_action_required_message on successful update" do
+    @bank_connection = bank_connections(:capital_one)
+
+    stub_plaid_methods do
+      assert_change -> { bank_connection.reload.user_action_required? }, false do
+        described_class.perform_now(bank_connection.id)
+      end
+    end
+  end
+
   def fake_plaid_institution
     {
       "institution" => {

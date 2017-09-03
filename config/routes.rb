@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   resources :bank_accounts, only: %i(index edit update) do
     resources :bank_transactions, path: "transactions", shallow: true, only: %i(index new create edit update destroy)
   end
-  resources :bank_connections, only: %i(index show new create destroy) do
+  resources :bank_connections, only: %i(index show new create destroy update) do
     post :refresh, on: :member
   end
   resources :transfers, only: %i(new create)

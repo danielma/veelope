@@ -26,6 +26,16 @@ class BankConnectionsController < ApplicationController
     redirect_to bank_connections_url, flash: { success: "Connected!" }
   end
 
+  def update
+    connection = BankConnection.find(params[:id])
+    connection.exchange_public_token(params[:public_token])
+
+    connection.save!
+    connection.refresh
+
+    redirect_to bank_connections_url, flash: { success: "Updated!" }
+  end
+
   def destroy
     bank_connection = BankConnection.find(params[:id])
 

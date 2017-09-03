@@ -27,6 +27,21 @@ class BankConnectionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to bank_connections_url
   end
 
+  test "#update can update with a new public_token" do
+    assert_change -> { bank_connection.reload.plaid_access_token }, "new_token" do
+      response = { "access_token" => "new_token" }
+
+      Plaid.client.item.public_token.expect(:exchange, response, ["tok_123"]) do
+        assert_enqueued_with(job: DownloadAccountsAndTransactionsJob) do
+          put(
+            bank_connection_url(bank_connection),
+            params: { id: bank_connection, public_token: "tok_123" },
+          )
+        end
+      end
+    end
+  end
+
   test "#refresh should enqueue download accounts job" do
     assert_enqueued_with(job: DownloadAccountsAndTransactionsJob) do
       post(refresh_bank_connection_url(bank_connection))

@@ -1,9 +1,18 @@
 <h1>Connections</h1>
 
 <% @bank_connections.each do |connection| %>
-  <div id="<%= dom_id(connection) %>">
-    <%= link_to(connection.institution_name || "(Unknown)", connection) %>
-    &mdash;
+  <div id="<%= dom_id(connection) %>" class="pane mb-1">
+    <%= link_to(connection, class: "pane-title") do %>
+      <%= connection.institution_name || "(Unknown)" %>
+      <% if connection.last_refresh_successful? && !connection.user_action_required? %>
+	<span class="c-green" title="Last refresh was successful"><i class="fa fa-check"></i></span>
+      <% else %>
+	<span class="c-red" title="Action is required to repair connection">
+	  &mdash; "<%= connection.user_action_required_message %>"
+	</span>
+      <% end %>
+    <% end %>
+
     Last refreshed:
     <% if connection.refreshed_at %>
       <%= connection.refreshed_at.to_s(:datetime) %>

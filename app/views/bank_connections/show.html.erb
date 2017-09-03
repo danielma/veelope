@@ -1,13 +1,36 @@
-<h1>Connection: <%= @bank_connection.institution_name %></h1>
+<%= link_to "< Connections", bank_connections_url %>
+<h1>
+  <%= @bank_connection.institution_name %>
+  <% if @bank_connection.last_refresh_successful? && !@bank_connection.user_action_required? %>
+    <span class="c-green" title="Last refresh was successful"><i class="fa fa-check"></i></span>
+  <% else %>
+    <span class="c-red" title="Action is required to repair @bank_connection">
+      &mdash; "<%= @bank_connection.user_action_required_message %>"
+    </span>
+  <% end %>
+</h1>
 
-<h2>Accounts</h2>
-<% @bank_connection.bank_accounts.each do |bank_account| %>
-  <div id="<%= dom_id bank_account %>">
-    <%= bank_account.name %>
-  </div>
+<div class="pane mb-1r">
+  <span class="pane-title">Accounts</span>
+  <% @bank_connection.bank_accounts.each do |bank_account| %>
+    <div id="<%= dom_id bank_account %>">
+      <%= bank_account.name %>
+    </div>
+  <% end %>
+</div>
+
+<% if @bank_connection.user_action_required? %>
+  <%= react_component(
+    "Components.PlaidLinkForm",
+    {
+      url: bank_connection_url(@bank_connection),
+      existing_public_token: @bank_connection.public_token,
+    },
+    class: "mb-1r",
+  ) %>
 <% end %>
 
-<div class="mt-1r">
+<div>
   <%= link_to "Force Refresh", refresh_bank_connection_path(@bank_connection), method: :post, class: "btn" %>
   <%= link_to "Delete", bank_connection_path(@bank_connection), method: :delete, class: "btn btn--danger", data: { confirm: "Are you sure?" } %>
 </div>

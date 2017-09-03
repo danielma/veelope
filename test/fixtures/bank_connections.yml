@@ -3,6 +3,14 @@ wescom_credit_union:
   account: west_family
   refreshed_at: 3005-01-01
 
+capital_one:
+  plaid_access_token: cp_12345
+  account: west_family
+  refreshed_at: 3005-02-01
+  successfully_refreshed_at: 3005-01-01
+  user_action_required_message: |
+    the login details of this item have changed (credentials, MFA, or required user action) and a user login is required to update this information. use Link's update mode to restore the item to a good state
+
 bluth_wells_fargo:
   plaid_access_token: wf_12345
   account: bluth_family
