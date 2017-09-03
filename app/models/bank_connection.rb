@@ -28,7 +28,9 @@ class BankConnection < ApplicationRecord
   end
 
   def last_refresh_successful?
-    (successfully_refreshed_at - refreshed_at).abs < 1
+    return false if refreshed_at.nil? || successfully_refreshed_at.nil?
+
+    (successfully_refreshed_at - refreshed_at).abs <= 1
   end
 
   def public_token

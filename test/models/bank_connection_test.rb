@@ -13,6 +13,12 @@ class BankConnectionTest < ActiveSupport::TestCase
     end
   end
 
+  test "#last_refresh_successful?" do
+    assert_predicate bank_connections(:wescom_credit_union), :last_refresh_successful?
+    refute_predicate bank_connections(:capital_one), :last_refresh_successful?
+    refute_predicate bank_connections(:bluth_wells_fargo), :last_refresh_successful?
+  end
+
   test "#user_action_required? if message is set" do
     refute_predicate bank_connections(:wescom_credit_union), :user_action_required?
     assert_predicate bank_connections(:capital_one), :user_action_required?

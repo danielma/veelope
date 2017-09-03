@@ -1,7 +1,8 @@
 wescom_credit_union:
   plaid_access_token: ws_12345
   account: west_family
-  refreshed_at: 3005-01-01
+  refreshed_at: 3005-01-01 00:00:00
+  successfully_refreshed_at: 3005-01-01 00:00:01
 
 capital_one:
   plaid_access_token: cp_12345
