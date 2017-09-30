@@ -144,6 +144,8 @@ GEM
     notiffany (0.1.0)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    ofx (0.3.2)
+      nokogiri
     parser (2.3.3.1)
       ast (~> 2.2)
     pg (0.19.0)
@@ -291,6 +293,7 @@ DEPENDENCIES
   listen (~> 3.0.5)
   minions_rails
   money-rails
+  ofx
   pg
   plaid
   pry-byebug

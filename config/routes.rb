@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :bank_transactions, only: %i(create)
+      resources :ofxs, only: %i(create)
     end
   end
 
