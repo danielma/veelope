@@ -23,6 +23,8 @@ class ApplicationController < ActionController::Base
       authenticate_with_session
     elsif cookies.signed[:user_id]
       authenticate_with_cookie
+    elsif request.headers["Authorization"]
+      authenticate_with_auth_token
     else
       flash[:info] = "Please login"
       redirect_to new_session_url
@@ -50,6 +52,21 @@ class ApplicationController < ActionController::Base
     cookies.delete :user_id
 
     redirect_to root_url
+  end
+
+  def authenticate_with_auth_token
+    authenticate_or_request_with_http_basic do |username, password|
+      @current_user = User.unscoped.find_by!(auth_token: username)
+
+      @current_user.authenticate(password)
+    end
+
+    set_current_tenant(current_user.account)
+  rescue
+    @current_user = nil
+    set_current_tenant nil
+
+    head :forbidden
   end
 
   def finish_onboarding
