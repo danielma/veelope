@@ -27,6 +27,12 @@ Rails.application.routes.draw do
   resources :transfers, only: %i(new create)
   resources :fundings, only: %i(new create)
 
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :bank_transactions, only: %i(create)
+    end
+  end
+
   mount Sidekiq::Web => "/sidekiq", constraints: SidekiqConstraint.new
 
   root to: "dashboards#show"
