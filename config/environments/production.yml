@@ -5,5 +5,7 @@ sidekiq:
   allow_all: false
   super_username: <%= ENV["SIDEKIQ_SUPER_USERNAME"] %>
 
+identifier_salt: veelope
+
 bugsnag:
   api_key: <%= ENV["BUGSNAG_API_KEY"] %>

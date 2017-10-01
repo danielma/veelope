@@ -19,6 +19,14 @@ west_checking_initial_balance:
   posted_at: 1885-01-01
   amount_cents: 10000
 
+already_imported:
+  account: west_family
+  bank_account: west_imports
+  payee: 'To GAMBINO,CHILDISH Business Banking Transfer ??'
+  posted_at: 2017-09-28
+  amount_cents: -20000
+  remote_identifier: 07cdd89aa88b8da4a0d92529151b81ca
+
 bluth_walmart:
   bank_account: bluth_savings
   account: bluth_family

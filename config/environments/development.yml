@@ -3,5 +3,7 @@ console:
 
 account_creation_secret: <%= ENV["ACCOUNT_CREATION_SECRET"] %>
 
+identifier_salt: 'salt'
+
 sidekiq:
   allow_all: true
