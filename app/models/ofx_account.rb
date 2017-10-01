@@ -1,7 +1,8 @@
 class OFXAccount
-  def initialize(account, organization:)
+  def initialize(account, organization:, source:)
     @account = account
     @organization = organization
+    @source = source
   end
 
   def identifier
@@ -11,24 +12,31 @@ class OFXAccount
   def to_bank_account
     BankAccount.find_or_initialize_by(remote_identifier: identifier) do |ba|
       ba.name = name
-      ba.type = type
+      ba.type = bank_account_type ||
+        fail("sorry, don't know how to deal with this type! #{account.type}")
     end
   end
 
   private
 
-  attr_reader :account, :organization
+  attr_reader :account, :organization, :source
 
   def name
-    "#{organization.name} #{account.type.capitalize}"
+    "#{organization.name} #{type.to_s.capitalize}"
   end
 
   def type
-    case account.type
-    when :checking
+    return account.type if account.type.present?
+
+    :credit if source.include?("CREDITCARDMSG")
+  end
+
+  def bank_account_type
+    case type
+    when :checking, :savings
       "depository"
-    else
-      fail "sorry, don't know how to deal with this type! #{account.type}"
+    when :credit
+      "credit"
     end
   end
 

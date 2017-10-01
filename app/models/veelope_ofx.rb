@@ -1,10 +1,11 @@
 class VeelopeOFX
   def initialize(source)
     @ofx = OFX(source)
+    @source = ofx.body
   end
 
   def account
-    @account ||= OFXAccount.new(ofx.account, organization: organization)
+    @account ||= OFXAccount.new(ofx.account, organization: organization, source: source)
   end
 
   def transactions
@@ -17,7 +18,7 @@ class VeelopeOFX
 
   private
 
-  attr_reader :ofx
+  attr_reader :ofx, :source
 
   class OFXOrganization
     def initialize(sign_on)

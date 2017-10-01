@@ -34,10 +34,21 @@ class OFXTransaction
   attr_reader :transaction, :account
 
   def raw_payee
-    transaction.memo.presence ||
-      transaction.payee.presence ||
+    raw_payee_from_name_and_memo.presence ||
       transaction.name.presence ||
+      transaction.payee.presence ||
       check_payee
+  end
+
+  def raw_payee_from_name_and_memo
+    memo = transaction.memo.presence
+    name = transaction.name.presence
+
+    if memo && name
+      memo.include?(name) ? memo : "#{name} #{memo}"
+    else
+      memo || name
+    end
   end
 
   def check_payee

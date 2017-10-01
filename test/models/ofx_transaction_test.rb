@@ -15,7 +15,7 @@ class OFXTransactionTest < ActiveSupport::TestCase
     assert_equal "CHECK #1234", transactions[0].payee
     assert_equal "SHERPA CO OUTBOX CO: DARKTOOTH MCWING", transactions[1].payee
     assert_equal "To GAMBINO,CHILDISH Business Banking Transfer ??", transactions[2].payee
-    assert_equal "Check Card: SQC*CHANCE THE RAPPER . /", transactions[3].payee
+    assert_equal "Check Card: SQC*CHANCE THE RAPPER . / FOR BURRITOS", transactions[3].payee
     assert_equal "BANKCORP BANK", transactions[4].payee
   end
 
