@@ -4,4 +4,6 @@ console:
 sidekiq:
   allow_all: true
 
+identifier_salt: 'salt'
+
 account_creation_secret: bojack

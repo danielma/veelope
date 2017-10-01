@@ -16,7 +16,7 @@ class BankTransaction < ApplicationRecord
 
   accepts_nested_attributes_for :designations
 
-  enum source: %i(remote manual)
+  enum source: %i(remote manual import)
 
   monetize :amount_cents
 

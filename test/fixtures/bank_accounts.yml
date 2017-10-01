@@ -19,6 +19,12 @@ west_transfers:
   name: <%= BankAccount::TRANSFERS_NAME %>
   type: <%= BankAccount.types[:utility] %>
 
+west_imports:
+  account: west_family
+  name: Imports
+  type: <%= BankAccount.types[:depository] %>
+  remote_identifier: dceaa5fb073e967f9ba48090e4720282
+
 bluth_savings:
   account: bluth_family
   name: Wells Fargo Savings
