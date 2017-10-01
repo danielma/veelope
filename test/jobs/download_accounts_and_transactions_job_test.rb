@@ -14,7 +14,7 @@ class DownloadAccountsAndTransactionsJobTest < ActiveJob::TestCase
   end
 
   test "sets refreshed_at for connection" do
-    Timecop.freeze do
+    Timecop.freeze(Time.current.round) do
       assert_change -> { bank_connection.reload.refreshed_at }, Time.current do
         stub_plaid_methods do
           described_class.perform_now(bank_connection.id)
@@ -24,7 +24,7 @@ class DownloadAccountsAndTransactionsJobTest < ActiveJob::TestCase
   end
 
   test "sets successfully_refreshed_at for connection" do
-    Timecop.freeze do
+    Timecop.freeze(Time.current.round) do
       assert_change -> { bank_connection.reload.successfully_refreshed_at }, Time.current do
         stub_plaid_methods do
           described_class.perform_now(bank_connection.id)
