@@ -54,3 +54,19 @@
 
   select
     width: 100%
+
+.bank-transaction-form
+  .bank-transaction-attribute
+    label
+      display: block
+      text-transform: uppercase
+      font-size: .75rem
+      color: lighten($black, 30%)
+      margin-bottom: .1rem
+
+    p
+      margin: 0 0 .5rem 0
+
+    @media (max-width: $sm + "px")
+      input
+        width: 100%

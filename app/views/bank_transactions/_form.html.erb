@@ -1,46 +1,48 @@
-<%= render_errors bank_transaction %>
+<div class="bank-transaction-form">
+  <%= render_errors bank_transaction %>
 
-<p>
-  <% if bank_transaction.new_record? %>
-    <%= f.label :payee %>
-    <%= f.text_field :payee %>
-  <% else %>
-    <strong>Payee:</strong>
-    <%= bank_transaction.payee %>
-  <% end %>
-</p>
+  <p class="bank-transaction-attribute">
+    <% if bank_transaction.new_record? %>
+      <%= f.label :payee %>
+      <%= f.text_field :payee %>
+    <% else %>
+      <label>Payee:</label>
+      <%= bank_transaction.payee %>
+    <% end %>
+  </p>
 
-<p>
-  <% if bank_transaction.new_record? %>
-    <%= f.label :bank_account_id %>
-    <%= f.collection_select :bank_account_id, BankAccount.all, :id, :name %>
+  <p class="bank-transaction-attribute">
+    <% if bank_transaction.new_record? %>
+      <%= f.label :bank_account_id %>
+      <%= f.collection_select :bank_account_id, BankAccount.all, :id, :name %>
 
-  <% else %>
-    <strong>Account:</strong>
-    <%= bank_transaction.bank_account.name %>
-  <% end %>
-</p>
+    <% else %>
+      <label>Account:</label>
+      <%= bank_transaction.bank_account.name %>
+    <% end %>
+  </p>
 
-<p>
-  <% if bank_transaction.new_record? %>
-    <%= f.label :posted_at %>
-    <%= f.date_field :posted_at %>
-  <% else %>
-    <strong>Date:</strong>
-    <%= bank_transaction.posted_at.to_s(:date) %>
-  <% end %>
-</p>
+  <p class="bank-transaction-attribute">
+    <% if bank_transaction.new_record? %>
+      <%= f.label :posted_at %>
+      <%= f.date_field :posted_at %>
+    <% else %>
+      <label>Date:</label>
+      <%= bank_transaction.posted_at.to_s(:date) %>
+    <% end %>
+  </p>
 
-<div class="field">
-  <%= f.label :memo, "Memo:", class: "d-ib" %>
-  <%= f.text_field :memo %>
+  <div class="field bank-transaction-attribute">
+    <%= f.label :memo, "Memo:", class: "d-ib" %>
+    <%= f.text_field :memo %>
+  </div>
+
+  <div class="field mb-1r">
+    <%= react_component(
+      "Components.DesignationEditor",
+      designation_editor_props(bank_transaction, envelopes: @envelopes)
+    ) %>
+  </div>
+
+  <%= return_to_path_hidden_field %>
 </div>
-
-<div class="field mb-1r">
-  <%= react_component(
-    "Components.DesignationEditor",
-    designation_editor_props(bank_transaction, envelopes: @envelopes)
-  ) %>
-</div>
-
-<%= return_to_path_hidden_field %>
