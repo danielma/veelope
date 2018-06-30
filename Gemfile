@@ -57,6 +57,7 @@ group :development, :test do
   gem "rack-mini-profiler"
   gem 'dotenv-rails'
   gem "bundler-audit"
+  gem "minitest-power_assert"
 end
 
 group :development do
