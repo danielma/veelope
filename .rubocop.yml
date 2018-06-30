@@ -26,12 +26,12 @@ AllCops:
   - 'bin/spring'
   DisplayCopNames: false
   StyleGuideCopsOnly: false
-  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.5
 
 Rails:
   Enabled: true
 
-Style/AccessModifierIndentation:
+Layout/AccessModifierIndentation:
   Description: Check indentation of private/protected visibility modifiers.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#indent-public-private-protected
   Enabled: true
@@ -40,7 +40,7 @@ Style/AccessModifierIndentation:
   - outdent
   - indent
 
-Style/AlignHash:
+Layout/AlignHash:
   Description: Align the elements of a hash literal if they span more than one line.
   Enabled: true
   EnforcedHashRocketStyle: key
@@ -52,7 +52,7 @@ Style/AlignHash:
   - ignore_implicit
   - ignore_explicit
 
-Style/AlignParameters:
+Layout/AlignParameters:
   Description: Align the parameters of a method call if they span more than one line.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-double-indent
   Enabled: true
@@ -88,11 +88,11 @@ Style/BracesAroundHashParameters:
   - no_braces
   - context_dependent
 
-Style/CaseIndentation:
+Layout/CaseIndentation:
   Description: Indentation of when in a case/when/[else/]end.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#indent-when-to-case
   Enabled: true
-  IndentWhenRelativeTo: case
+  EnforcedStyle: case
   SupportedStyles:
   - case
   - end
@@ -137,7 +137,7 @@ Style/CommentAnnotation:
   - HACK
   - REVIEW
 
-Style/DotPosition:
+Layout/DotPosition:
   Description: Checks the position of the dot in multi-line method calls.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#consistent-multi-line-chains
   Enabled: true
@@ -146,13 +146,13 @@ Style/DotPosition:
   - leading
   - trailing
 
-Style/EmptyLineBetweenDefs:
+Layout/EmptyLineBetweenDefs:
   Description: Use empty lines between defs.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#empty-lines-between-methods
   Enabled: true
   AllowAdjacentOneLineDefs: false
 
-Style/EmptyLinesAroundBlockBody:
+Layout/EmptyLinesAroundBlockBody:
   Description: Keeps track of empty lines around block bodies.
   Enabled: true
   EnforcedStyle: no_empty_lines
@@ -160,7 +160,7 @@ Style/EmptyLinesAroundBlockBody:
   - empty_lines
   - no_empty_lines
 
-Style/EmptyLinesAroundClassBody:
+Layout/EmptyLinesAroundClassBody:
   Description: Keeps track of empty lines around class bodies.
   Enabled: true
   EnforcedStyle: no_empty_lines
@@ -168,7 +168,7 @@ Style/EmptyLinesAroundClassBody:
   - empty_lines
   - no_empty_lines
 
-Style/EmptyLinesAroundModuleBody:
+Layout/EmptyLinesAroundModuleBody:
   Description: Keeps track of empty lines around module bodies.
   Enabled: true
   EnforcedStyle: no_empty_lines
@@ -180,18 +180,14 @@ Style/Encoding:
   Description: Use UTF-8 as the source file encoding.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#utf-8
   Enabled: false
-  EnforcedStyle: always
-  SupportedStyles:
-  - when_needed
-  - always
 
-Style/FileName:
+Naming/FileName:
   Description: Use snake_case for source file names.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#snake-case-files
   Enabled: true
   Exclude: []
 
-Style/FirstParameterIndentation:
+Layout/FirstParameterIndentation:
   Description: Checks the indentation of the first parameter in a method call.
   Enabled: true
   EnforcedStyle: consistent
@@ -245,7 +241,6 @@ Style/IfUnlessModifier:
   Description: Favor modifier if/unless usage when you have a single-line body.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#if-as-a-modifier
   Enabled: false
-  MaxLineLength: 100
 
 Style/IndentationWidth:
   Description: Use 2 spaces for indentation.
@@ -517,7 +512,19 @@ Style/TrailingCommaInArguments:
     - consistent_comma
     - no_comma
 
-Style/TrailingCommaInLiteral:
+Style/TrailingCommaInArrayLiteral:
+  # If `comma`, the cop requires a comma after the last item in an array or
+  # hash, but only when each item is on its own line.
+  # If `consistent_comma`, the cop requires a comma after the last item of all
+  # non-empty array and hash literals.
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+  SupportedStyles:
+    - comma
+    - consistent_comma
+    - no_comma
+
+Style/TrailingCommaInHashLiteral:
   # If `comma`, the cop requires a comma after the last item in an array or
   # hash, but only when each item is on its own line.
   # If `consistent_comma`, the cop requires a comma after the last item of all
@@ -568,7 +575,6 @@ Style/WhileUntilModifier:
   Description: Favor modifier while/until usage when you have a single-line body.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#while-as-a-modifier
   Enabled: false
-  MaxLineLength: 100
 
 Style/WordArray:
   Description: Use %w or %W for arrays of words.
@@ -640,7 +646,6 @@ Lint/AssignmentInCondition:
 Lint/EndAlignment:
   Description: Align ends correctly.
   Enabled: true
-  AlignWith: keyword
   SupportedStyles:
   - keyword
   - variable
@@ -648,7 +653,6 @@ Lint/EndAlignment:
 Lint/DefEndAlignment:
   Description: Align ends corresponding to defs correctly.
   Enabled: true
-  AlignWith: start_of_line
   SupportedStyles:
   - start_of_line
   - def
@@ -968,7 +972,7 @@ Style/LineEndConcatenation:
     end.
   Enabled: true
 
-Style/MethodCallParentheses:
+Style/MethodCallWithoutArgsParentheses:
   Description: Do not use parentheses for method calls with no arguments.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-args-no-parens
   Enabled: true
@@ -1027,7 +1031,7 @@ Style/OneLineConditional:
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#ternary-operator
   Enabled: false
 
-Style/OpMethod:
+Naming/BinaryOperatorParameterName:
   Description: When defining binary operators, name the argument other.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#other-arg
   Enabled: true
@@ -1210,11 +1214,11 @@ Lint/AmbiguousRegexpLiteral:
     invocation without parenthesis.
   Enabled: true
 
-Lint/BlockAlignment:
+Layout/BlockAlignment:
   Description: Align block ends correctly.
   Enabled: true
 
-Lint/ConditionPosition:
+Layout/ConditionPosition:
   Description: Checks for condition placed in a confusing position relative to the
     keyword.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#same-line-condition
@@ -1253,18 +1257,13 @@ Lint/EnsureReturn:
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-return-ensure
   Enabled: true
 
-Lint/Eval:
+Security/Eval:
   Description: The use of eval represents a serious security risk.
   Enabled: true
 
 Lint/HandleExceptions:
   Description: Don't suppress exception.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#dont-hide-exceptions
-  Enabled: true
-
-Lint/InvalidCharacterLiteral:
-  Description: Checks for invalid character literals with a non-escaped whitespace
-    character.
   Enabled: true
 
 Lint/LiteralInCondition:

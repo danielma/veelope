@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-ruby "2.2.2"
+ruby "2.5.0"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -7,7 +7,7 @@ git_source(:github) do |repo_name|
 end
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails"
-gem "rails", "~> 5.0.1"
+gem "rails", "~> 5.2"
 # Use postgresql as the database for Active Record
 # Use Puma as the app server
 gem "puma", "~> 3.0"
@@ -38,6 +38,7 @@ gem "awesome_print"
 gem "acts_as_tenant"
 gem "bugsnag"
 gem "ofx"
+gem "bootsnap"
 
 # Use Capistrano for deployment
 # gem "capistrano-rails", group: :development
@@ -47,12 +48,9 @@ group :development, :test do
   gem "byebug", platform: :mri
   gem "pry-byebug"
 
-  gem "guard"
-  gem "guard-minitest"
   gem "pry-rails"
   gem "rubocop", "~> 0.42"
   gem "timecop"
-  gem "guard-livereload", "~> 2.5", require: false
   gem "rack-livereload"
   gem "better_errors"
   gem "binding_of_caller"
