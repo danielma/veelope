@@ -1,6 +1,6 @@
 import React from "react"
 import bankTransactionApi from "api/bank_transaction"
-const { arrayOf, shape, string, number } = React.PropTypes
+const { arrayOf, shape, string, number, bool } = React.PropTypes
 
 export default React.createClass({
   propTypes: {
@@ -16,6 +16,7 @@ export default React.createClass({
       fullName: string.isRequired,
       id: number.isRequired,
     })).isRequired,
+    disabled: bool,
   },
 
   getInitialState() {
@@ -42,13 +43,15 @@ export default React.createClass({
   },
 
   render() {
-    const { envelopes, bankTransaction } = this.props
+    const { envelopes, bankTransaction, disabled } = this.props
     const envelope = bankTransaction.envelopes[0]
 
     return (
       <div>
         {bankTransaction.envelopes.length > 1 ? (
           <span>Split</span>
+        ) : disabled ? (
+          <span>{envelope ? envelope.fullName : "No designations"}</span>
         ) : (
           <div className="designation-selector">
             <select

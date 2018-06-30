@@ -21,7 +21,7 @@ west_vons_another_date:
   account: west_family
   payee: Vons
   posted_at: 2017-01-19
-  amount_cents: -4000
+  amount_cents: -5000
   source: remote
 
 west_undesignated:

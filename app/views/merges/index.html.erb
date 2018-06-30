@@ -1,0 +1,56 @@
+<h1>Merges</h1>
+
+<table class="bank-transactions-table zebra-group-two">
+  <thead>
+    <tr>
+      <th>Bank account</th>
+      <th>Payee</th>
+      <th>Amount</th>
+      <th>Envelope</th>
+      <th>Posted</th>
+      <th>Merge</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @candidates.each do |candidate| %>
+      <tr>
+        <td class="bank-transactions-table-account"><%= candidate.bank_account.name %></td>
+        <td class="bank-transactions-table-payee">
+          <%= link_to edit_bank_transaction_path(candidate, return_to: request.fullpath) do %>
+            <%= candidate.payee %>
+            <% if candidate.memo.present? %>
+              (<%= candidate.memo %>)
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= candidate.amount.format %></td>
+        <td>
+          <%= react_component "Components.DesignationSelector", designation_selector_props(candidate, envelopes: @envelopes, disabled: true) %>
+        </td>
+        <td><%= candidate.posted_at.to_s(:date) %></td>
+
+        <td rowspan="2">
+          <%= button_to "Merge", merges_url(mergeable_a: candidate, mergeable_b: candidate.merge_candidate), class: "btn--primary" %>
+        </td>
+      </tr>
+      <tr>
+        <td class="bank-transactions-table-account"><%= candidate.merge_candidate.bank_account.name %></td>
+        <td class="bank-transactions-table-payee">
+          <%= link_to edit_bank_transaction_path(candidate.merge_candidate, return_to: request.fullpath) do %>
+            <%= candidate.merge_candidate.payee %>
+            <% if candidate.merge_candidate.memo.present? %>
+              (<%= candidate.merge_candidate.memo %>)
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= candidate.merge_candidate.amount.format %></td>
+        <td>
+          <%= react_component "Components.DesignationSelector", designation_selector_props(candidate, envelopes: @envelopes, disabled: true) %>
+        </td>
+        <td><%= candidate.merge_candidate.posted_at.to_s(:date) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @candidates %>

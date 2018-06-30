@@ -21,8 +21,10 @@ class BankTransaction < ApplicationRecord
       joins(<<~SQL.squish).select("#{table_name}.*", "merge_candidates.id AS merge_candidate_id")
         INNER JOIN #{table_name} as merge_candidates
           ON merge_candidates.id <> #{table_name}.id
+          AND merge_candidates.bank_account_id = #{table_name}.bank_account_id
           AND LOWER(merge_candidates.payee) = LOWER(#{table_name}.payee)
           AND merge_candidates.amount_cents = #{table_name}.amount_cents
+          AND merge_candidates.posted_at = #{table_name}.posted_at
           AND #{table_name}.created_at < merge_candidates.created_at
       SQL
     end,
@@ -40,6 +42,22 @@ class BankTransaction < ApplicationRecord
   validates :remote_identifier, uniqueness: true, allow_nil: true
 
   class << self
+    def merge(transaction_a, transaction_b)
+      a_has_designations = transaction_a.designations.any?
+      b_has_designations = transaction_b.designations.any?
+
+      if !candidates_for_merge?(transaction_a, transaction_b)
+        MergeError.new("neither a candidate for merge!")
+      elsif a_has_designations && b_has_designations
+        MergeError.new("both transactions have designations!")
+      else
+        to_delete = a_has_designations ? transaction_b : transaction_a
+        to_delete.destroy!
+      end
+    end
+
+    private
+
     def candidates_for_merge?(transaction_a, transaction_b)
       candidate = candidate_for_merge.find_by(id: [transaction_a.id, transaction_b.id])
 
@@ -63,21 +81,7 @@ class BankTransaction < ApplicationRecord
     designation ? designation.amount : amount
   end
 
-  def merge!(other)
-    i_have_designations = designations.any?
-    other_has_designations = other.designations.any?
-
-    if !candidates_for_merge?(self, other)
-      MergeError.new("neither a candidate for merge!")
-    elsif i_have_designations && other_has_designations
-      MergeError.new("both transactions have designations!")
-    else
-      to_delete = i_have_designations ? other : self
-      to_delete.destroy!
-    end
-  end
-
-  delegate :candidates_for_merge?, to: :class
+  attr_accessor :merge_candidate
 
   private
 

@@ -1,5 +1,5 @@
 module BankTransactionsHelper
-  def designation_selector_props(bank_transaction, envelopes:)
+  def designation_selector_props(bank_transaction, envelopes:, disabled: false)
     {
       bank_transaction: {
         id: bank_transaction.id,
@@ -7,6 +7,7 @@ module BankTransactionsHelper
         envelopes: bank_transaction.envelopes.map { |e| e.slice(:id, :name) },
       },
       envelopes: envelopes_props(envelopes),
+      disabled: disabled,
     }
   end
 

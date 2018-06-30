@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :bank_transactions, path: "transactions", only: %i(index new create) do
     get :inbox, on: :collection
   end
+  resources :merges, only: %i(index create)
   resources :envelopes do
     resources :bank_transactions, path: "transactions", only: %(index)
   end

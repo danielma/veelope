@@ -32,7 +32,7 @@ module Veelope
       file "#{Rails.root}/config/environments/#{Rails.env}_secrets.yml"
     end
 
-    config.react.campelize_props = true
+    config.react.camelize_props = true
     config.active_job.queue_adapter = :sidekiq
   end
 end
