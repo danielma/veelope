@@ -3,9 +3,6 @@
   width: 100%
   table-layout: fixed
 
-  tr:nth-child(even)
-    background-color: lighten($silver, 13%)
-
   th, td
     text-align: left
     padding: .3rem .5rem
@@ -16,6 +13,16 @@
   &-payee
     overflow: hidden
 
+  &.zebra
+    tr:nth-child(even)
+      background-color: lighten($silver, 13%)
+
+
+  &.zebra-group-two
+    tbody
+      tr:nth-child(4n-1),
+      tr:nth-child(4n)
+        background-color: lighten($silver, 13%)
   
 .bank-transaction
   padding: .5rem

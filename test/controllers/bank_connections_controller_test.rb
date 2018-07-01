@@ -53,14 +53,14 @@ class BankConnectionsControllerTest < ActionDispatch::IntegrationTest
   test "#destroy removes a bank connection with accounts, transactions, and designations" do
     assert_difference "BankConnection.unscoped.count", -1 do
       assert_difference "BankAccount.unscoped.count", -2 do
-        assert_difference "BankTransaction.unscoped.count", -3 do
+        assert_difference "BankTransaction.unscoped.count", -5 do
           assert_difference "Designation.unscoped.count", -3 do
             delete bank_connection_url(bank_connection)
+
+            assert_redirected_to bank_connections_url
           end
         end
       end
     end
-
-    assert_redirected_to bank_connections_url
   end
 end

@@ -68,13 +68,19 @@ class DownloadAccountsAndTransactionsJobTest < ActiveJob::TestCase
     assert_equal(Money.new((11_132.02 - 900) * 100), bank_account.initial_balance)
 
     stub_plaid_accounts do
-      assert_equal bank_account.remote_bank_account["balances"]["current"], bank_account.balance
+      assert_equal(
+        Money.new(bank_account.remote_bank_account["balances"]["current"] * 100),
+        bank_account.balance,
+      )
     end
 
     bank_account = BankAccount.find_by!(remote_identifier: "ac_2")
     assert_equal(Money.new((-40 + 120.4 + 40) * 100), bank_account.initial_balance)
     stub_plaid_accounts do
-      assert_equal(-bank_account.remote_bank_account["balances"]["current"], bank_account.balance)
+      assert_equal(
+        Money.new(-bank_account.remote_bank_account["balances"]["current"] * 100),
+        bank_account.balance,
+      )
     end
   end
 
