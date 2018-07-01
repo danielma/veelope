@@ -1,15 +1,20 @@
 class OFXAccount
-  def initialize(account, organization:, source:)
+  def initialize(account, organization:, source:, bank_account: nil)
     @account = account
     @organization = organization
     @source = source
+    @bank_account = bank_account
   end
 
   def identifier
+    return bank_account.remote_identifier if bank_account
+
     Digest::MD5.hexdigest(raw_identifier)
   end
 
   def to_bank_account
+    return bank_account if bank_account
+
     BankAccount.find_or_initialize_by(remote_identifier: identifier) do |ba|
       ba.name = name
       ba.type = bank_account_type ||
@@ -19,7 +24,7 @@ class OFXAccount
 
   private
 
-  attr_reader :account, :organization, :source
+  attr_reader :account, :organization, :source, :bank_account
 
   def name
     "#{organization.name} #{type.to_s.capitalize}"

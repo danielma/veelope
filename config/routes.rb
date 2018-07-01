@@ -32,6 +32,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :bank_transactions, only: %i(create)
       resources :ofxs, only: %i(create)
+      resources :bank_accounts, only: [] do
+        resources :ofxs, only: %i(create), controller: :bank_account_ofxs
+      end
     end
   end
 
