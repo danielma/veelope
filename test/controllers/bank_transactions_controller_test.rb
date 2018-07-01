@@ -37,7 +37,7 @@ class BankTransactionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "#create creates a transaction" do
-    assert_difference "BankTransaction.unscoped.manual.count" do
+    assert_difference "BankTransaction.unscoped.source_manual.count" do
       post(
         bank_transactions_url,
         params: bank_transaction_create_params,
