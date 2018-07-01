@@ -51,7 +51,7 @@ export default React.createClass({
         {bankTransaction.envelopes.length > 1 ? (
           <span>Split</span>
         ) : disabled ? (
-          <span>{envelope ? envelope.fullName : "No designations"}</span>
+          <span>{envelope ? envelope.name : "No designations"}</span>
         ) : (
           <div className="designation-selector">
             <select

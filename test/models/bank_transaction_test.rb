@@ -39,6 +39,20 @@ class BankTransactionTest < ActiveSupport::TestCase
     assert { original.reload.present? }
   end
 
+  test ".merge is ok if neither have designations" do
+    original = bank_transactions(:west_vons_needs_merge)
+    candidate = bank_transactions(:west_vons)
+
+    candidate.designations.destroy_all
+
+    assert_difference "BankTransaction.unscoped.count", -1 do
+      described_class.merge(original, candidate)
+    end
+
+    assert_raises(ActiveRecord::RecordNotFound) { candidate.reload }
+    assert { original.reload.present? }
+  end
+
   test ".merge returns an error if both have designations" do
     candidate = bank_transactions(:west_vons_needs_merge)
     candidate.designations.create!(envelope: envelopes(:groceries))

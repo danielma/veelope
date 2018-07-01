@@ -49,7 +49,7 @@ class BankTransaction < ApplicationRecord
       if (error = candidates_for_merge_error(transaction_a, transaction_b))
         error
       else
-        [transaction_a.designations, transaction_b.designations].find(&:any?).each do |d|
+        [transaction_a.designations, transaction_b.designations].select(&:any?).flatten.each do |d|
           d.update!(bank_transaction: grouped_transactions[true].first)
         end
         grouped_transactions[false].first.reload.destroy!
