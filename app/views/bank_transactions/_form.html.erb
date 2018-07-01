@@ -32,6 +32,13 @@
     <% end %>
   </p>
 
+  <% if bank_transaction.persisted? %>
+    <p class="bank-transaction-attribute">
+      <label>Created:</label>
+      <%= bank_transaction.created_at.to_s %>
+    </p>
+  <% end %>
+
   <div class="field bank-transaction-attribute">
     <%= f.label :memo, "Memo:", class: "d-ib" %>
     <%= f.text_field :memo %>
