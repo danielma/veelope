@@ -24,9 +24,8 @@ class BankTransaction < ApplicationRecord
           INNER JOIN #{table_name} as merge_candidates
             ON merge_candidates.id <> #{table_name}.id
             AND merge_candidates.bank_account_id = #{table_name}.bank_account_id
-            AND LOWER(merge_candidates.payee) = LOWER(#{table_name}.payee)
             AND merge_candidates.amount_cents = #{table_name}.amount_cents
-            AND merge_candidates.posted_at = #{table_name}.posted_at
+            AND DATE_PART('day', merge_candidates.posted_at) - DATE_PART('day', #{table_name}.posted_at) <= 1
             AND merge_candidates.source <> #{table_name}.source
         SQL
     end,
