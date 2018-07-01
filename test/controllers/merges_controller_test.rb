@@ -10,8 +10,8 @@ class MergesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
 
-    expected_candidate = bank_transactions(:west_vons)
-    mergeable = bank_transactions(:west_vons_needs_merge)
+    expected_candidate = bank_transactions(:west_vons_needs_merge)
+    mergeable = bank_transactions(:west_vons)
 
     url = merges_url(mergeable_a: expected_candidate, mergeable_b: mergeable)
 

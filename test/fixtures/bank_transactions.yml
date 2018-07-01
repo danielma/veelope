@@ -5,7 +5,7 @@ west_vons:
   posted_at: 2016-12-23
   amount_cents: -5000
   created_at: 2016-12-24 09:01:24
-  source: remote
+  source: import
 
 west_vons_needs_merge:
   bank_account: west_checking
@@ -14,7 +14,7 @@ west_vons_needs_merge:
   posted_at: 2016-12-23
   amount_cents: -5000
   created_at: 2016-12-24 09:01:25
-  source: import
+  source: remote
 
 west_vons_another_date:
   bank_account: west_checking

@@ -111,7 +111,7 @@ class DownloadAccountsAndTransactionsJobTest < ActiveJob::TestCase
   end
 
   test "adds transactions from plaid" do
-    assert_difference "BankTransaction.remote.count", 3 do
+    assert_difference "BankTransaction.source_remote.count", 3 do
       stub_plaid_methods do
         described_class.perform_now(bank_connection.id)
       end
@@ -128,7 +128,7 @@ class DownloadAccountsAndTransactionsJobTest < ActiveJob::TestCase
   end
 
   test "gets all pages of transactions" do
-    assert_difference "BankTransaction.remote.count", 3 do
+    assert_difference "BankTransaction.source_remote.count", 3 do
       stub_plaid_methods do
         described_class.perform_now(bank_connection.id)
       end
@@ -145,7 +145,7 @@ class DownloadAccountsAndTransactionsJobTest < ActiveJob::TestCase
   end
 
   test "ignores pending transactions from plaid" do
-    assert_difference "BankTransaction.remote.count", 3 do
+    assert_difference "BankTransaction.source_remote.count", 3 do
       stub_plaid_methods do
         described_class.perform_now(bank_connection.id)
       end
@@ -157,7 +157,7 @@ class DownloadAccountsAndTransactionsJobTest < ActiveJob::TestCase
   end
 
   test "transaction creation is idempotent" do
-    assert_difference "BankTransaction.remote.count", 3 do
+    assert_difference "BankTransaction.source_remote.count", 3 do
       stub_plaid_methods do
         described_class.perform_now(bank_connection.id)
       end
