@@ -45,7 +45,7 @@
         </td>
         <td><%= candidate.merge_candidate.amount.format %></td>
         <td>
-          <%= react_component "Components.DesignationSelector", designation_selector_props(candidate, envelopes: @envelopes, disabled: true) %>
+          <%= react_component "Components.DesignationSelector", designation_selector_props(candidate.merge_candidate, envelopes: @envelopes, disabled: true) %>
         </td>
         <td><%= candidate.merge_candidate.posted_at.to_s(:date) %></td>
       </tr>
