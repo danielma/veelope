@@ -23,6 +23,7 @@ class BankTransaction < ApplicationRecord
         joins(<<~SQL.squish)
           INNER JOIN #{table_name} as merge_candidates
             ON merge_candidates.id <> #{table_name}.id
+            AND levenshtein(merge_candidates.payee, #{table_name}.payee, 0, 0, 1) < 3
             AND merge_candidates.bank_account_id = #{table_name}.bank_account_id
             AND merge_candidates.amount_cents = #{table_name}.amount_cents
             AND DATE_PART('day', merge_candidates.posted_at) - DATE_PART('day', #{table_name}.posted_at) <= 1
