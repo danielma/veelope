@@ -7,7 +7,10 @@ module API
 
       test "import transactions into known account" do
         assert_no_difference "BankAccount.unscoped.count" do
-          assert_difference "BankTransaction.unscoped.count", 4 do
+          assert_difference(
+            "BankTransaction.where(bank_account: bank_accounts(:west_imports)).unscoped.count",
+            4,
+          ) do
             post api_v1_ofxs_url, params: { file: fixture_file_upload("/files/transactions.qfx") }
 
             assert_response :created

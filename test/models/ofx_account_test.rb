@@ -2,7 +2,7 @@ require "test_helper"
 
 class OFXAccountTest < ActiveSupport::TestCase
   def subject
-    VeelopeOFX.new(fixture).account
+    VeelopeOFX.new(fixture, bank_account: bank_account).account
   end
 
   def fixture
@@ -12,6 +12,8 @@ class OFXAccountTest < ActiveSupport::TestCase
   def fixture_name
     @fixture_name ||= "transactions.qfx"
   end
+
+  attr_reader :bank_account
 
   test "#to_bank_account can return persisted account" do
     assert_equal bank_accounts(:west_imports), subject.to_bank_account
@@ -26,5 +28,11 @@ class OFXAccountTest < ActiveSupport::TestCase
     assert_equal "Bank.org Checking", bank_account.name
     assert_equal "depository", bank_account.type
     refute_nil bank_account.remote_identifier
+  end
+
+  test "#to_bank_account can return manual account" do
+    @bank_account = bank_accounts(:west_transfers)
+
+    assert { subject.to_bank_account == bank_account }
   end
 end
