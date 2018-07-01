@@ -26,7 +26,7 @@ class BankTransaction < ApplicationRecord
             AND levenshtein(merge_candidates.payee, #{table_name}.payee, 0, 0, 1) < 3
             AND merge_candidates.bank_account_id = #{table_name}.bank_account_id
             AND merge_candidates.amount_cents = #{table_name}.amount_cents
-            AND DATE_PART('day', merge_candidates.posted_at) - DATE_PART('day', #{table_name}.posted_at) <= 1
+            AND abs(extract(epoch from merge_candidates.posted_at - #{table_name}.posted_at)) < 86401
             AND merge_candidates.source <> #{table_name}.source
         SQL
     end,
