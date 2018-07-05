@@ -7,7 +7,7 @@ class BankTransaction < ApplicationRecord
   has_many :designations, dependent: :destroy, inverse_of: :bank_transaction
   has_many :envelopes, through: :designations
 
-  default_scope -> { order(posted_at: :desc) }
+  default_scope -> { order(posted_at: :desc, id: :desc) }
 
   scope :credit, -> { where(amount_cents: 1..Float::INFINITY) }
   scope :debit, -> { where(amount_cents: -Float::INFINITY..0) }
