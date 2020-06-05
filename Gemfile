@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-ruby "2.5.0"
+ruby "2.5.6"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -37,7 +37,7 @@ gem "pg"
 gem "awesome_print"
 gem "acts_as_tenant"
 gem "bugsnag"
-gem "ofx"
+gem "ofx", git: 'https://github.com/annacruz/ofx'
 gem "bootsnap"
 
 # Use Capistrano for deployment

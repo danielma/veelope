@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/annacruz/ofx
+  revision: 03a1f9894d3f857211c8ce40505fac043d70e1ad
+  specs:
+    ofx (0.3.2)
+      nokogiri
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -131,8 +138,6 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.8.3)
       mini_portile2 (~> 2.3.0)
-    ofx (0.3.2)
-      nokogiri
     parallel (1.12.1)
     parser (2.5.0.5)
       ast (~> 2.4.0)
@@ -150,7 +155,7 @@ GEM
     pry-rails (0.3.5)
       pry (>= 0.9.10)
     public_suffix (2.0.5)
-    puma (3.6.2)
+    puma (3.12.6)
     rack (2.0.5)
     rack-livereload (0.3.16)
       rack
@@ -283,8 +288,8 @@ DEPENDENCIES
   minions_rails
   minitest-power_assert
   money-rails
-  ofx
   pg
+  ofx!
   plaid
   pry-byebug
   pry-rails
@@ -307,7 +312,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-   ruby 2.5.0p0
+   ruby 2.5.6p201
 
 BUNDLED WITH
-   1.16.1
+   1.17.3
