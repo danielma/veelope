@@ -156,7 +156,7 @@ GEM
       pry (>= 0.9.10)
     public_suffix (2.0.5)
     puma (3.12.6)
-    rack (2.0.5)
+    rack (2.2.3)
     rack-livereload (0.3.16)
       rack
     rack-mini-profiler (0.10.1)
@@ -288,8 +288,8 @@ DEPENDENCIES
   minions_rails
   minitest-power_assert
   money-rails
-  pg
   ofx!
+  pg
   plaid
   pry-byebug
   pry-rails
