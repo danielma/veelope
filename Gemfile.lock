@@ -62,7 +62,7 @@ GEM
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
     bcrypt (3.1.10)
-    better_errors (2.4.0)
+    better_errors (2.8.0)
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
@@ -76,7 +76,7 @@ GEM
       bundler (~> 1.2)
       thor (~> 0.18)
     byebug (9.0.6)
-    coderay (1.1.2)
+    coderay (1.1.3)
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     config_spartan (1.0.1)
@@ -90,7 +90,7 @@ GEM
     dotenv-rails (2.5.0)
       dotenv (= 2.5.0)
       railties (>= 3.2, < 6.0)
-    erubi (1.7.1)
+    erubi (1.10.0)
     execjs (2.7.0)
     ffi (1.9.14)
     globalid (0.4.1)
@@ -117,7 +117,9 @@ GEM
     marcel (0.3.2)
       mimemagic (~> 0.3.2)
     method_source (0.8.2)
-    mimemagic (0.3.2)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minions_rails (0.0.7)
@@ -156,7 +158,7 @@ GEM
       pry (>= 0.9.10)
     public_suffix (2.0.5)
     puma (3.12.6)
-    rack (2.0.5)
+    rack (2.2.3)
     rack-livereload (0.3.16)
       rack
     rack-mini-profiler (0.10.1)
@@ -288,8 +290,8 @@ DEPENDENCIES
   minions_rails
   minitest-power_assert
   money-rails
-  pg
   ofx!
+  pg
   plaid
   pry-byebug
   pry-rails
