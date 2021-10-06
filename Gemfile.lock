@@ -78,10 +78,10 @@ GEM
     byebug (9.0.6)
     coderay (1.1.2)
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.0.5)
+    concurrent-ruby (1.1.9)
     config_spartan (1.0.1)
       hashie
-    connection_pool (2.2.1)
+    connection_pool (2.2.5)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.4)
@@ -117,7 +117,9 @@ GEM
     marcel (0.3.2)
       mimemagic (~> 0.3.2)
     method_source (0.8.2)
-    mimemagic (0.3.2)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minions_rails (0.0.7)
@@ -156,12 +158,12 @@ GEM
       pry (>= 0.9.10)
     public_suffix (2.0.5)
     puma (3.12.6)
-    rack (2.0.5)
+    rack (2.2.3)
     rack-livereload (0.3.16)
       rack
     rack-mini-profiler (0.10.1)
       rack (>= 1.2.0)
-    rack-protection (2.0.1)
+    rack-protection (2.1.0)
       rack
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
@@ -201,7 +203,7 @@ GEM
       execjs
       railties (>= 3.2)
       tilt
-    redis (3.3.5)
+    redis (4.4.0)
     request_store (1.3.1)
     rubocop (0.54.0)
       parallel (~> 1.10)
@@ -224,11 +226,10 @@ GEM
       sprockets (> 2.11)
       sprockets-rails
       tilt
-    sidekiq (4.2.7)
-      concurrent-ruby (~> 1.0)
-      connection_pool (~> 2.2, >= 2.2.0)
+    sidekiq (5.2.0)
+      connection_pool (~> 2.2, >= 2.2.2)
       rack-protection (>= 1.5.0)
-      redis (~> 3.2, >= 3.2.1)
+      redis (>= 3.3.5, < 5)
     slop (3.6.0)
     spring (2.0.2)
       activesupport (>= 4.2)
@@ -288,8 +289,8 @@ DEPENDENCIES
   minions_rails
   minitest-power_assert
   money-rails
-  pg
   ofx!
+  pg
   plaid
   pry-byebug
   pry-rails
@@ -301,7 +302,7 @@ DEPENDENCIES
   request_store (= 1.3.1)
   rubocop (~> 0.42)
   sassc-rails
-  sidekiq (~> 4)
+  sidekiq (~> 5)
   spring
   spring-watcher-listen (~> 2.0.0)
   timecop
