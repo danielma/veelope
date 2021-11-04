@@ -117,9 +117,11 @@ GEM
     marcel (0.3.2)
       mimemagic (~> 0.3.2)
     method_source (0.8.2)
-    mimemagic (0.3.2)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
     mini_mime (1.0.0)
-    mini_portile2 (2.3.0)
+    mini_portile2 (2.6.1)
     minions_rails (0.0.7)
     minitest (5.11.3)
     minitest-power_assert (0.3.0)
@@ -136,8 +138,9 @@ GEM
       railties (>= 3.0)
     msgpack (1.2.4)
     nio4r (2.3.1)
-    nokogiri (1.8.3)
-      mini_portile2 (~> 2.3.0)
+    nokogiri (1.12.5)
+      mini_portile2 (~> 2.6.1)
+      racc (~> 1.4)
     parallel (1.12.1)
     parser (2.5.0.5)
       ast (~> 2.4.0)
@@ -156,6 +159,7 @@ GEM
       pry (>= 0.9.10)
     public_suffix (2.0.5)
     puma (3.12.6)
+    racc (1.6.0)
     rack (2.0.5)
     rack-livereload (0.3.16)
       rack
@@ -288,8 +292,8 @@ DEPENDENCIES
   minions_rails
   minitest-power_assert
   money-rails
-  pg
   ofx!
+  pg
   plaid
   pry-byebug
   pry-rails
