@@ -117,7 +117,9 @@ GEM
     marcel (0.3.2)
       mimemagic (~> 0.3.2)
     method_source (0.8.2)
-    mimemagic (0.3.2)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minions_rails (0.0.7)
@@ -249,7 +251,7 @@ GEM
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.0)
-    tzinfo (1.2.5)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     uglifier (3.0.4)
       execjs (>= 0.3.0, < 3)
@@ -288,8 +290,8 @@ DEPENDENCIES
   minions_rails
   minitest-power_assert
   money-rails
-  pg
   ofx!
+  pg
   plaid
   pry-byebug
   pry-rails
